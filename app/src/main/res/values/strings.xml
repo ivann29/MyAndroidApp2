@@ -7,4 +7,17 @@
     <string name="confirmLogin">Button</string>
     <string name="location">Location</string>
     <string name="confirm_login">confirm</string>
+    <string name="title_activity_log_in">LogIn</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="common_interests">common_interests</string>
+    <string name="common_free_time">common_free_time</string>
+    <string name="events">events</string>
+    <string name="pen_friends">pen_friends</string>
 </resources>

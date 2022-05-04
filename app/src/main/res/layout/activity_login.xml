@@ -1,21 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/ic_quantum_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".TestIvan">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="253dp"
+        android:src="@mipmap/logo2_foreground" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <EditText
+            android:id="@+id/mailET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/text_box"
+            android:hint="Email"/>
+        <EditText
+            android:id="@+id/passET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/text_box"
+            android:hint="Password"/>
+
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/confirmLogin"
+        android:id="@+id/loggInBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/forgotPassTV"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/btn_bg"
+        android:onClick="onBtnLogin"
+        android:text="LOG IN"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/forgotPassTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onConfirmLogin_Clicked"
-        android:text="@string/confirm_login"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26dp"
+        android:onClick="onBackLoginButton_Clicked"
+        android:text="Forgot password?"
+        android:textColor="@color/purple_200"
+        android:textStyle="bold" />
+
+</RelativeLayout>
