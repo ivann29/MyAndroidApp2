@@ -8,7 +8,7 @@ import android.view.View;
 
 public class AccountActivity extends AppCompatActivity
 {
-
+//gnegnegne
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
