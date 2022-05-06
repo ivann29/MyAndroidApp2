@@ -20,4 +20,16 @@
     <string name="common_free_time">common_free_time</string>
     <string name="events">events</string>
     <string name="pen_friends">pen_friends</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login1">LOG IN</string>
+    <string name="logo">TODO</string>
+    <string name="tendina">TODO</string>
+    <string name="login">LOG IN</string>
+    <string name="signup">SIGN UP</string>
+    <string name="fff_logo">TODO</string>
+    <string name="interests_string">common interests</string>
+    <string name="penfriends_string">pen friends</string>
+    <string name="freetime_string">common free time</string>
 </resources>

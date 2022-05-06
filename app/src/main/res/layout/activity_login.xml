@@ -5,12 +5,15 @@
     android:background="@drawable/ic_quantum_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestIvan">
+    tools:context=".LoginActivity">
 
     <ImageView
+        android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="253dp"
-        android:src="@mipmap/logo2_foreground" />
+        android:contentDescription="@string/logo"
+        android:src="@mipmap/logo2_foreground"
+        tools:ignore="ImageContrastCheck" />
 
 
     <LinearLayout
@@ -18,22 +21,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true">
+
         <EditText
             android:id="@+id/mailET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
             android:layout_margin="8dp"
             android:background="@drawable/text_box"
-            android:hint="Email"/>
+            android:hint="@string/email"
+            android:importantForAutofill="no"
+            android:padding="12dp"
+            tools:ignore="TextContrastCheck"
+            android:inputType="textEmailAddress" />
+
         <EditText
             android:id="@+id/passET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
             android:layout_margin="8dp"
             android:background="@drawable/text_box"
-            android:hint="Password"/>
+            android:hint="@string/password"
+            android:padding="12dp"
+            tools:ignore="TextContrastCheck"
+            android:inputType="textPassword"
+            android:importantForAutofill="no" />
 
 
     </LinearLayout>
@@ -47,8 +58,8 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_bg"
-        android:onClick="onBtnLogin"
-        android:text="LOG IN"
+        android:onClick="onBtnLogin_Clicked"
+        android:text="@string/login"
         android:textColor="#fff" />
 
     <TextView
@@ -58,8 +69,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="26dp"
-        android:onClick="onBackLoginButton_Clicked"
-        android:text="Forgot password?"
+        android:minHeight="48dp"
+        android:onClick="onBtnLogin_Clicked"
+        android:text="@string/forgot_password"
         android:textColor="@color/purple_200"
         android:textStyle="bold" />
 

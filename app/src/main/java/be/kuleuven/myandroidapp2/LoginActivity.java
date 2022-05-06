@@ -34,11 +34,11 @@ public class LoginActivity extends AppCompatActivity {
     public void onConfirmLogin_Clicked  (View caller)
     {
         Intent intent = new Intent(this, AccountActivity.class);
-        //intent.putExtra("Order",order);
         startActivity(intent);
 
     }
-    public void onBtnLogin(View caller) {
+
+    public void onBtnLogin_Clicked (View caller) {
         requestQueue = Volley.newRequestQueue(this);
 
         EditText textEmailField = (EditText) findViewById(R.id.mailET);
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             if (!responseEmail.equals("") && !responsePassword.equals("")) {
-                                Intent intent = new Intent(caller.getContext(), MapsActivity.class);
+                                Intent intent = new Intent(caller.getContext(), MainMenu.class);
                                 startActivity(intent);
                             }
 

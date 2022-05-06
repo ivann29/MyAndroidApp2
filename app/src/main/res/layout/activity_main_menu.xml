@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainMenu">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,9 +18,11 @@
             android:layout_height="80dp"
             android:adjustViewBounds="false"
             android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/tendina"
-            tools:layout_editor_absoluteX="-189dp" />
+            tools:ignore="ImageContrastCheck"
+            android:contentDescription="@string/tendina" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -30,8 +32,6 @@
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.45">
 
@@ -50,14 +50,16 @@
                     <TextView
                         android:id="@+id/interests"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="26dp"
                         android:layout_alignTop="@+id/interestsImage"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginTop="91dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="93dp"
+                        android:layout_marginEnd="0dp"
                         android:layout_marginBottom="1dp"
-                        android:text="@string/common_interests"
+                        android:text="@string/interests_string"
                         android:textSize="20sp"
                         app:fontFamily="sans-serif" />
 
@@ -98,8 +100,8 @@
                         android:layout_alignParentBottom="true"
                         android:layout_marginStart="30dp"
                         android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="0dp"
-                        android:text="@string/pen_friends"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/penfriends_string"
                         android:textSize="20sp"
                         app:fontFamily="sans-serif" />
 
@@ -144,10 +146,12 @@
                         android:id="@+id/freetime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="0dp"
-                        android:text="@string/common_free_time"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/freetime_string"
                         android:textSize="20sp"
                         app:fontFamily="sans-serif" />
 
@@ -181,7 +185,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/eventsImage"
-                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="50dp"
                         android:layout_marginTop="10dp"
                         android:text="@string/events"
                         android:textSize="20sp"
@@ -200,7 +205,6 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

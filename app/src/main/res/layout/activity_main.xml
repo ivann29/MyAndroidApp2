@@ -5,12 +5,15 @@
     android:background="@drawable/ic_quantum_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TestIvan">
+    tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/ffflogo"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:src="@mipmap/logo2_foreground" />
+        android:src="@mipmap/logo2_foreground"
+        tools:ignore="ImageContrastCheck"
+        android:contentDescription="@string/fff_logo" />
 
 
 
@@ -30,7 +33,7 @@
             android:background="@drawable/btn_bg"
 
             android:onClick="onLoginButton_Clicked"
-            android:text="LOG IN"
+            android:text="@string/login"
             android:textColor="#fff" />
 
         <Button
@@ -43,7 +46,7 @@
             android:background="@drawable/btn_bg"
 
             android:onClick="onSignUpButton_Clicked"
-            android:text="SIGN UP"
+            android:text="@string/signup"
             android:textColor="#fff" />
 
 
