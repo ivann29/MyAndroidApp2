@@ -22,6 +22,7 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private static final String QUEUE_URL = "https://studev.groept.be/api/a21pt206/LogIn/";
+    public String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -66,7 +67,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
                             if (!responseEmail.equals("") && !responsePassword.equals("")) {
-                                Intent intent = new Intent(caller.getContext(), MainMenu.class);
+
+                                Intent intent = new Intent(caller.getContext(), Dash.class);
                                 startActivity(intent);
                             }
 
@@ -89,5 +91,10 @@ public class LoginActivity extends AppCompatActivity {
 
         requestQueue.add(submitRequest);
 
+    }
+    public  String getEmail(){
+        EditText textEmailField = (EditText) findViewById(R.id.mailET);
+           String email1 = textEmailField.getText().toString();
+          return "djd";
     }
 }

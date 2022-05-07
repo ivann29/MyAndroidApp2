@@ -32,4 +32,6 @@
     <string name="interests_string">common interests</string>
     <string name="penfriends_string">pen friends</string>
     <string name="freetime_string">common free time</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
