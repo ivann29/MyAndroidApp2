@@ -2,12 +2,26 @@ package be.kuleuven.myandroidapp2;
 
 
 
+
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-/*
 public class HomeFragment extends Fragment {
 
     FirebaseAuth firebaseAuth;
@@ -37,7 +51,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadPosts() {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
+        /*DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -55,7 +69,7 @@ public class HomeFragment extends Fragment {
 
                 Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
     }
 
     @Override
@@ -64,6 +78,7 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+}
 
 
- */
+
