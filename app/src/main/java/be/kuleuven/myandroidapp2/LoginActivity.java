@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         requestQueue.add(submitRequest);
 
     }
+
     public  String getEmail(){
         EditText textEmailField = (EditText) findViewById(R.id.mailET);
            String email1 = textEmailField.getText().toString();

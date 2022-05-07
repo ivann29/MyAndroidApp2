@@ -33,6 +33,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.ByteArrayOutputStream;
 
@@ -69,6 +70,8 @@ public class AddBlogsFragment extends Fragment {
     String name, email, uid, dp;
     //DatabaseReference databaseReference;
     Button upload;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -251,80 +254,13 @@ public class AddBlogsFragment extends Fragment {
 
     // if access is given then pick image from gallery
     private void pickFromGallery() {
+
         Intent galleryIntent = new Intent(Intent.ACTION_PICK);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, IMAGEPICK_GALLERY_REQUEST);
     }
 
-    // Upload the value of blog data into firebase
-    /*private void uploadData(final String titl, final String description) {
-        // show the progress dialog box
-        pd.setMessage("Publishing Post");
-        pd.show();
-        final String timestamp = String.valueOf(System.currentTimeMillis());
-        String filepathname = "Posts/" + "post" + timestamp;
-        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] data = byteArrayOutputStream.toByteArray();
 
-        // initialising the storage reference for updating the data
-        StorageReference storageReference1 = FirebaseStorage.getInstance().getReference().child(filepathname);
-        storageReference1.putBytes(data).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // getting the url of image uploaded
-                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isSuccessful()) ;
-                String downloadUri = uriTask.getResult().toString();
-                if (uriTask.isSuccessful()) {
-                    // if task is successful the update the data into firebase
-                    HashMap<Object, String> hashMap = new HashMap<>();
-                    hashMap.put("uid", uid);
-                    hashMap.put("uname", name);
-                    hashMap.put("uemail", email);
-                    hashMap.put("udp", dp);
-                    hashMap.put("title", titl);
-                    hashMap.put("description", description);
-                    hashMap.put("uimage", downloadUri);
-                    hashMap.put("ptime", timestamp);
-                    hashMap.put("plike", "0");
-                    hashMap.put("pcomments", "0");
-
-                    // set the data into firebase and then empty the title ,description and image data
-                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
-                    databaseReference.child(timestamp).setValue(hashMap)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    pd.dismiss();
-                                    Toast.makeText(getContext(), "Published", Toast.LENGTH_LONG).show();
-                                    title.setText("");
-                                    des.setText("");
-                                    image.setImageURI(null);
-                                    imageuri = null;
-                                    startActivity(new Intent(getContext(), LoginActivity.class)); //change was made
-                                    getActivity().finish();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            pd.dismiss();
-                            Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                pd.dismiss();
-                Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-     */
     private void uploadData(final String titl, final String description) {
         // show the progress dialog box
         pd.setMessage("Publishing Post");
@@ -340,15 +276,15 @@ public class AddBlogsFragment extends Fragment {
         /////
 
 
-
+        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         //requestQueue = Volley.newRequestQueue(this);
 
         //Bundle info = getIntent().getExtras();
 
         String requestURL = SUBMIT_URL  +
-                email  +"/" +
-                name + "/" +
-                 "/" +
+                titl  +"/" +
+                description + "/" +"hey"+
+                 "/"+ data +
                 "/" +
                 dp ;
         Log.d("Database","creating response");
@@ -365,7 +301,7 @@ public class AddBlogsFragment extends Fragment {
                         des.setText("");
                         image.setImageURI(null);
                         imageuri = null;
-                        startActivity(new Intent(getContext(), LoginActivity.class)); //change was made
+                        startActivity(new Intent(getContext(), Dash.class)); //change was made
                         getActivity().finish();
                     }
                 },
@@ -373,6 +309,7 @@ public class AddBlogsFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        System.out.println("IVAN2");
                         pd.dismiss();
                         Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
                     }
@@ -380,12 +317,24 @@ public class AddBlogsFragment extends Fragment {
 
         );
 
-
+        System.out.println("here");
         requestQueue.add(submitRequest);
+        System.out.println("here2");
         Log.d("Database","response sent");
 
         ;
     }
+
+
+    //////////////////
+    /////////////////
+
+
+
+
+
+
+
     // Here we are getting data from image
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
