@@ -1,6 +1,7 @@
 package be.kuleuven.myandroidapp2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private static final String QUEUE_URL = "https://studev.groept.be/api/a21pt206/LogIn/";
     public String email;
+    private SharedPreferences Shared_pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Shared_pref = getSharedPreferences("details", MODE_PRIVATE);
     }
 
     public void onConfirmLogin_Clicked  (View caller)
@@ -62,6 +65,10 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject curObject = response.getJSONObject(i);
                                 responseEmail += curObject.getString("email");
                                 responsePassword += curObject.getString("password");
+                                SharedPreferences.Editor editor = Shared_pref.edit();
+                                editor.putString("email", responseEmail);
+                                editor.putString("password", responsePassword);
+                                editor.apply();
                                 System.out.println(responseEmail);
 
                             }

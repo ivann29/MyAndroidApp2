@@ -5,16 +5,19 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +28,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -36,6 +41,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.io.ByteArrayOutputStream;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 //import com.google.firebase.storage.FirebaseStorage;
 //import com.google.firebase.storage.StorageReference;
@@ -51,8 +59,9 @@ public class AddBlogsFragment extends Fragment {
         // Required empty public constructor
     }
     private RequestQueue requestQueue;
-    private static final String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/Blog/";
+    private static final String POST_URL = "https://studev.groept.be/api/a21pt206/Blog";
 
+    private String imageString;
 
     //FirebaseAuth firebaseAuth;
     EditText title, des;
@@ -70,6 +79,9 @@ public class AddBlogsFragment extends Fragment {
     String name, email, uid, dp;
     //DatabaseReference databaseReference;
     Button upload;
+    private ProgressDialog progressDialog;
+
+    private SharedPreferences newPreference;
 
 
 
@@ -78,6 +90,7 @@ public class AddBlogsFragment extends Fragment {
         // Inflate the layout for this fragment
         //firebaseAuth = FirebaseAuth.getInstance();
         View view = inflater.inflate(R.layout.fragment_add_blogs, container, false);
+        requestQueue = Volley.newRequestQueue(getContext());
 
         title = view.findViewById(R.id.ptitle);
         des = view.findViewById(R.id.pdes);
@@ -263,66 +276,63 @@ public class AddBlogsFragment extends Fragment {
 
     private void uploadData(final String titl, final String description) {
         // show the progress dialog box
-        pd.setMessage("Publishing Post");
-        pd.show();
-        final String timestamp = String.valueOf(System.currentTimeMillis());
+        /*pd.setMessage("Publishing Post");
+        pd.show();*/
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Uploading, please wait...");
+        progressDialog.show();
+        /*final String timestamp = String.valueOf(System.currentTimeMillis());
         String filepathname = "Posts/" + "post" + timestamp;
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] data = byteArrayOutputStream.toByteArray();
+*/
+        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
 
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        byte[] byteFormat = stream.toByteArray();
 
-        /////
+        // Get the Base64 string
+        imageString = Base64.encodeToString(byteFormat, Base64.NO_WRAP);
 
+        /////////
 
-        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
-        //requestQueue = Volley.newRequestQueue(this);
+        StringRequest  submitRequest = new StringRequest (Request.Method.POST, POST_URL,  new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Turn the progress widget off
+                progressDialog.dismiss();
+                System.out.println("success");
+               //Toast.makeText(MainActivity.this, "Post request executed", Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("fail");
+               // Toast.makeText(MainActivity.this, "Post request failed", Toast.LENGTH_LONG).show();
+            }
+        }) { //NOTE THIS PART: here we are passing the parameter to the webservice, NOT in the URL!
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
+                String email = newPreference.getString("email", null);
+                String password = newPreference.getString("password", null);
+                LocalDateTime timex = LocalDateTime.now();
+                String format= timex.toString();
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("description", description);
+                params.put("title", titl);
+                params.put("uimage", imageString);
+                params.put("time",format );
+                return params;
+            }
+        };
 
-        //Bundle info = getIntent().getExtras();
-
-        String requestURL = SUBMIT_URL  +
-                titl  +"/" +
-                description + "/" +"hey"+
-                 "/"+ data +
-                "/" +
-                dp ;
-        Log.d("Database","creating response");
-        System.out.println("Hey");
-        StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        System.out.println("IVAN");
-                        Log.d("Database","response received");
-                        pd.dismiss();
-                        Toast.makeText(getContext(), "Published", Toast.LENGTH_LONG).show();
-                        title.setText("");
-                        des.setText("");
-                        image.setImageURI(null);
-                        imageuri = null;
-                        startActivity(new Intent(getContext(), Dash.class)); //change was made
-                        getActivity().finish();
-                    }
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println("IVAN2");
-                        pd.dismiss();
-                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-        );
-
-        System.out.println("here");
         requestQueue.add(submitRequest);
-        System.out.println("here2");
-        Log.d("Database","response sent");
-
-        ;
     }
 
 

@@ -1,9 +1,11 @@
 package be.kuleuven.myandroidapp2;
 
 
-
 import android.content.Context;
-import android.text.format.DateFormat;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,12 +22,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.google.firebase.auth.FirebaseAuth;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2.AdapterPosts.MyHolder> {
 
@@ -37,7 +41,7 @@ public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2
     public AdapterPosts(Context context, List<ModelPost> modelPosts) {
         this.context = context;
         this.modelPosts = modelPosts;
-        myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        //myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         //liekeref = FirebaseDatabase.getInstance().getReference().child("Likes");
         //postref = FirebaseDatabase.getInstance().getReference().child("Posts");
     }
@@ -61,31 +65,43 @@ public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2
         String dp = modelPosts.get(position).getUdp();
         String plike = modelPosts.get(position).getPlike();
         final String image = modelPosts.get(position).getUimage();
+
+
+        /*byte[] imageBytes = Base64.decode(image, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length); */
+
         String email = modelPosts.get(position).getUemail();
         String comm = modelPosts.get(position).getPcomments();
         final String pid = modelPosts.get(position).getPtime();
-        Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-        calendar.setTimeInMillis(Long.parseLong(ptime));
-        String timedate = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
+        //Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
+        //calendar.setTimeInMillis(Long.parseLong(ptime));
+        //String timedate = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
         holder.name.setText(nameh);
         holder.title.setText(titlee);
         holder.description.setText(descri);
-        holder.time.setText(timedate);
+        holder.time.setText(ptime);
         holder.like.setText(plike + " Likes");
         holder.comments.setText(comm + " Comments");
         //setLikes(holder, ptime);
         try {
-            Glide.with(context).load(dp).into(holder.picture);
+
+
+            byte[] imageBytes = Base64.decode(image, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            holder.picture.setImageBitmap(bitmap);
+
         } catch (Exception e) {
 
         }
         holder.image.setVisibility(View.VISIBLE);
         try {
-            Glide.with(context).load(image).into(holder.image);
+            byte[] imageBytes = Base64.decode(image, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+            holder.image.setImageBitmap(bitmap);
         } catch (Exception e) {
 
         }
-        /*holder.like.setOnClickListener(new View.OnClickListener() {
+       /* holder.like.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -94,14 +110,71 @@ public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2
                 holder.itemView.getContext().startActivity(intent);
             }
         });*/
-        /*holder.likebtn.setOnClickListener(new View.OnClickListener() {
+        holder.likebtn.setOnClickListener(new View.OnClickListener() {
+
+            private RequestQueue requestQueue;
+            private static final String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/likes/";
+            int check =1;
             @Override
             public void onClick(View v) {
-                final int plike = Integer.parseInt(modelPosts.get(position).getPlike());
-                mprocesslike = true;
+                int plike = Integer.parseInt(modelPosts.get(holder.getAdapterPosition()).getPlike());
+
+                if(check ==1) {
+
+                    plike += 1;
+                    String l = Integer.toString(plike);
+                    requestQueue = Volley.newRequestQueue(v.getContext());
+                    String requestURL = SUBMIT_URL  +
+                            l  +"/" +
+                            modelPosts.get(holder.getAdapterPosition()).getTitle() ;
+                    Log.d("Database","creating response");
+
+                    StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    Log.d("Database","response received");
+                                    System.out.println("success");
+                                }
+                            },
+
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+
+                                }
+                            }
+
+                    );
+
+
+                    requestQueue.add(submitRequest);
+                    Log.d("Database","response sent");
+
+                    modelPosts.get(holder.getAdapterPosition()).setPlike(l);
+                    holder.like.setText(plike + " Likes");
+
+                    check =0;
+                }
+                else{
+
+                    plike = plike-1;
+                    String l = Integer.toString(plike);
+                    modelPosts.get(holder.getAdapterPosition()).setPlike(l);
+                    holder.like.setText(plike + " Likes");
+                    check =1;
+
+                }
+                    //plike += 1;
+
+               /*  int plike = Integer.parseInt(modelPosts.get(position).getPlike());
+                plike += 1;
+                postref.child(postid).child("plike").setValue("" + (plike - 1));*/
+                /*mprocesslike = true;
                 final String postid = modelPosts.get(position).getPtime();
                 liekeref.addValueEventListener(new ValueEventListener() {
                     @Override
+                    //plike += 1;
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (mprocesslike) {
                             if (dataSnapshot.child(postid).hasChild(myuid)) {
@@ -120,9 +193,9 @@ public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
                     }
-                });
+                });*/
             }
-        });*/
+        });
         holder.more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +210,7 @@ public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2
                 context.startActivity(intent);
             }
         });*/
+
     }
 
     private void showMoreOptions(ImageButton more, String uid, String myuid, final String pid, final String image) {
