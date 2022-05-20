@@ -19,24 +19,23 @@ public class Dash extends AppCompatActivity {
     BottomNavigationView navigationView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash);
-
-
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Profile Activity");
+        actionBar.setTitle("Users");
 
 
         navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
-        actionBar.setTitle("Home");
+        actionBar.setTitle("Users");
+
 
         // When we open the application first
         // time the fragment should be shown to the user
         // in this case it is home fragment
-        HomeFragment fragment = new HomeFragment();
+       // int fragment =  getIntent().getExtras().getInt("frgToLoad");
+        UsersFragment fragment = new UsersFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.content, fragment, "");
         fragmentTransaction.commit();
@@ -64,7 +63,7 @@ public class Dash extends AppCompatActivity {
                     return true;
 
                 case R.id.nav_users:
-                   actionBar.setTitle("Users");
+                    actionBar.setTitle("Users");
                     UsersFragment fragment2 = new UsersFragment();
                     FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction2.replace(R.id.content, fragment2, "");
