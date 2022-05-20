@@ -25,13 +25,13 @@ public class Dash extends AppCompatActivity {
         setContentView(R.layout.activity_dash);
 
 
-        //actionBar = getSupportActionBar();
-        //actionBar.setTitle("Profile Activity");
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("Profile Activity");
 
 
         navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
-        //actionBar.setTitle("Home");
+        actionBar.setTitle("Home");
 
         // When we open the application first
         // time the fragment should be shown to the user
@@ -48,7 +48,7 @@ public class Dash extends AppCompatActivity {
             switch (menuItem.getItemId()) {
 
                 case R.id.nav_home:
-                    //actionBar.setTitle("Home");
+                    actionBar.setTitle("Home");
                     HomeFragment fragment = new HomeFragment();
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.content, fragment, "");
@@ -56,7 +56,7 @@ public class Dash extends AppCompatActivity {
                     return true;
 
                 case R.id.nav_profile:
-                    //actionBar.setTitle("Profile");
+                    actionBar.setTitle("Profile");
                     ProfileFragment fragment1 = new ProfileFragment();
                     FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction1.replace(R.id.content, fragment1);
@@ -64,7 +64,7 @@ public class Dash extends AppCompatActivity {
                     return true;
 
                 case R.id.nav_users:
-                   //actionBar.setTitle("Users");
+                   actionBar.setTitle("Users");
                     UsersFragment fragment2 = new UsersFragment();
                     FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction2.replace(R.id.content, fragment2, "");
@@ -72,7 +72,7 @@ public class Dash extends AppCompatActivity {
                     return true;
 
                 case R.id.nav_chat:
-                    //actionBar.setTitle("Chats");
+                    actionBar.setTitle("Chats");
                     ChatListFragment listFragment = new ChatListFragment();
                     FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction3.replace(R.id.content, listFragment, "");
@@ -80,7 +80,7 @@ public class Dash extends AppCompatActivity {
                     return true;
 
                 case R.id.nav_addblogs:
-                    //actionBar.setTitle("Add Blogs");
+                    actionBar.setTitle("Add Blogs");
                     AddBlogsFragment fragment4 = new AddBlogsFragment();
                     FragmentTransaction fragmentTransaction4 = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction4.replace(R.id.content, fragment4, "");
