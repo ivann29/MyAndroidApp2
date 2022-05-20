@@ -14,6 +14,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="common_interests">common_interests</string>
@@ -34,4 +35,31 @@
     <string name="freetime_string">common free time</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_people_here">Search people here...</string>
+    <string name="user_full_name">user full name</string>
+    <string name="user_email">useremail</string>
+    <string name="lente_">TODO</string>
+    <string name="account_btn">TODO</string>
+    <string name="location_User">TextView</string>
+    <string name="string_location_user">location_user</string>
+    <string name="string_string_location_user">string_string_location_user</string>
+    <string name="user_location">\"open the map!\"</string>
+    <string name="string_user_location">Open the Map</string>
+    <string name="firstLocationMessage">Open the map to check your location is correctly set!</string>
+    <string name="buttonOfFreeTime">Button</string>
+    <string name="buttonOfInterest">Button</string>
+    <string name="profilepic">profilepic</string>
+    <string name="sportsbtn">sportsbtn</string>
+    <string name="sports">sports</string>
+    <string name="music">MUSIC</string>
+    <string name="extreme_sports">EXTREME SPORTS</string>
+    <string name="acting">ACTING</string>
+    <string name="art">Art</string>
+    <string name="tv_series_and_movies">TV SERIES AND MOVIES</string>
+    <string name="business">BUSINESS</string>
+    <string name="politics">POLITICS</string>
+    <string name="food_and_drinks">FOOD AND DRINKS</string>
+    <string name="singing">SINGING</string>
+    <string name="select_your_interests">Select your interests!</string>
+    <string name="select_when_you_are_free_to_hang_out">Select when you are free to hang out!</string>
 </resources>

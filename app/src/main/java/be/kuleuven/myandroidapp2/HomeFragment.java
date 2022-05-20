@@ -147,7 +147,8 @@ public class HomeFragment extends Fragment {
 
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }

@@ -93,9 +93,11 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="26dp"
+        android:minHeight="48dp"
         android:onClick="onBackLoginButton_Clicked"
         android:text="Back to Log in"
         android:textColor="@color/purple_200"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 </RelativeLayout>

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.common.collect.Maps;
+
 
 public class MapsActivity extends AppCompatActivity {
 
@@ -30,10 +30,13 @@ public class MapsActivity extends AppCompatActivity {
         {
             init();
         }
+
     }
 
     private void init()
     {
+
+
         Button btnMap = (Button) findViewById(R.id.buttonMaps);
         btnMap.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view)

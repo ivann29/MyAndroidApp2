@@ -73,9 +73,11 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
 
-                            if (!responseEmail.equals("") && !responsePassword.equals("")) {
+                            if (!responseEmail.equals("") && !responsePassword.equals(""))
+                            {
 
-                                Intent intent = new Intent(caller.getContext(), Dash.class);
+
+                                Intent intent = new Intent(caller.getContext(), Menu.class);
                                 startActivity(intent);
                             }
 
@@ -102,7 +104,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public  String getEmail(){
         EditText textEmailField = (EditText) findViewById(R.id.mailET);
-           String email1 = textEmailField.getText().toString();
-          return "djd";
+        String email1 = textEmailField.getText().toString();
+        return "djd";
+
     }
 }

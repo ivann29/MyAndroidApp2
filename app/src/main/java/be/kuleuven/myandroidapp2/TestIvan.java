@@ -18,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 public class TestIvan extends AppCompatActivity {
     private RequestQueue requestQueue;
     private static final String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/SignUp/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
