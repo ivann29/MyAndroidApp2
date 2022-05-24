@@ -6,13 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MapsActivity">
 
+
+    <ImageView
+        android:id="@+id/tendina"
+        android:layout_width="755dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="false"
+        android:contentDescription="@string/tendina"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tendina"
+        tools:ignore="ImageContrastCheck" />
+
     <Button
         android:id="@+id/buttonMaps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_width="189dp"
+        android:layout_height="54dp"
+        android:backgroundTint="#D53E7E"
+        android:text="@string/check_position"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.374"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/buttonSet"
+        android:layout_width="189dp"
+        android:layout_height="54dp"
+        android:backgroundTint="#D53E7E"
+        android:onClick="onConfirm"
+        android:text="@string/confirm_position"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMaps"
+        app:layout_constraintVertical_bias="0.202"
+        tools:ignore="TextContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

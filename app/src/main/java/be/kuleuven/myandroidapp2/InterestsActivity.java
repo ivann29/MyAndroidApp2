@@ -1,8 +1,15 @@
 package be.kuleuven.myandroidapp2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +40,7 @@ public class InterestsActivity extends AppCompatActivity
     private Button businessbtn;
     private Button ConfirmButton;
     private String[] array;
+    private SharedPreferences newPreference;
 
 
 
@@ -60,15 +68,20 @@ public class InterestsActivity extends AppCompatActivity
 
     public void onCofirm_clicked(View caller)
     {
+        newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
+        String email = newPreference.getString("email", null);
         RequestQueue requestQueue;
         String SUBMIT_URL =" https://studev.groept.be/api/a21pt206/accountInterestIole/";
 
         requestQueue = Volley.newRequestQueue(this);
 
         String requestURL = SUBMIT_URL  +
-                array[0]  +"/" +
+                array[0] +"/" +
                 array[1] + "/" +
-                array[2] ;
+                array[2] + "/" +
+                email;
+
+
 
         Log.d("Database","creating response");
 
@@ -98,10 +111,236 @@ public class InterestsActivity extends AppCompatActivity
 
     }
 
+    @SuppressLint("ResourceAsColor")
+    public void politicsBtn_clicked   (View caller)
+    {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+
+        Drawable buttonDrawable = politicsbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        politicsbtn.setBackground(buttonDrawable);
+
+        int a=0;
+
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(array[i].equals("") && a==0)
+            {
+                array[i]=politicsbtn.getText().toString();
+                a=1;
+            }
+            else{}
+        }
+        }
+    }
+
+    public void musicBtn_clicked   (View caller)
+    {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+        Drawable buttonDrawable = musicbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        musicbtn.setBackground(buttonDrawable);
+        int a=0;
+
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(array[i].equals("") && a==0)
+            {
+                array[i]=musicbtn.getText().toString();
+                a=1;
+            }
+            else{}
+        }}
+    }
+
+
+
+
+    public void extremeSportsbtn_clicked   (View caller)
+    {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+        Drawable buttonDrawable = extremesportsbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        extremesportsbtn.setBackground(buttonDrawable);
+        int a=0;
+
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(array[i].equals("") && a==0)
+            {
+                array[i]=extremesportsbtn.getText().toString();
+                a=1;
+            }
+            else{}
+        }}
+    }
+
+
+    public void foodDrinksBtn_clicked   (View caller)
+    {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+        Drawable buttonDrawable = foodbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        foodbtn.setBackground(buttonDrawable);
+        int a=0;
+
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(array[i].equals("") && a==0)
+            {
+                array[i]=foodbtn.getText().toString();
+                a=1;
+            }
+            else{}
+        }}
+
+    }
+
+
+    public void singBtn_Clicked   (View caller)
+    {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+        Drawable buttonDrawable = signbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        signbtn.setBackground(buttonDrawable);
+        int a=0;
+
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(array[i].equals("") && a==0)
+            {
+                array[i]=signbtn.getText().toString();
+                a=1;
+            }
+            else{}
+        }}
+    }
+
+
+
+    public void businessBtn_Clicked   (View caller)
+    {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+        Drawable buttonDrawable = businessbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        businessbtn.setBackground(buttonDrawable);
+        int a=0;
+
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(array[i].equals("") && a==0)
+            {
+                array[i]=businessbtn.getText().toString();
+                a=1;
+            }
+            else{}
+        }}
+    }
+
+
+
+
+
+
+
     public void onSports_clicked   (View caller)
     {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+        Drawable buttonDrawable = sportsbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        sportsbtn.setBackground(buttonDrawable);
         int a=0;
-        sportsbtn.setBackgroundResource(R.color.colorSelected);
+
         for(int i = 0; i<array.length; i++ )
 
         {
@@ -111,13 +350,30 @@ public class InterestsActivity extends AppCompatActivity
                 a=1;
             }
             else{}
-        }
+        }}
     }
 
     public void actingBtn_Clicked   (View caller)
     {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+        Drawable buttonDrawable = actingbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        actingbtn.setBackground(buttonDrawable);
+
         int a=0;
-        actingbtn.setBackgroundResource(R.color.colorSelected);
+
         for(int i = 0; i<array.length; i++ )
         {
             if(array[i].equals("")&& a==0)
@@ -126,13 +382,29 @@ public class InterestsActivity extends AppCompatActivity
                 a=1;
             }
             else{}
-        }
+        }}
     }
 
     public void moviesBtn_Clicked   (View caller)
     {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+        Drawable buttonDrawable = moviesbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        moviesbtn.setBackground(buttonDrawable);
         int a=0;
-        moviesbtn.setBackgroundResource(R.color.colorSelected);
+
         for(int i = 0; i<array.length; i++ )
         {
             if(array[i].equals("") && a==0)
@@ -141,13 +413,29 @@ public class InterestsActivity extends AppCompatActivity
                 a=1;
             }
             else{}
-        }
+        }}
     }
 
     public void onArtBtn_Clicked  (View caller)
     {
+        int b=0;
+        for(int i = 0; i<array.length; i++ )
+
+        {
+            if(!array[i].equals(""))
+            {
+                b=b+1;
+            }
+
+        }
+        if (b==3){}
+        else{
+        Drawable buttonDrawable = artbtn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        artbtn.setBackground(buttonDrawable);
         int a=0;
-        artbtn.setBackgroundResource(R.color.colorSelected);
+
         for(int i = 0; i<array.length; i++ )
         {
             if(array[i].equals("") && a==0)
@@ -157,7 +445,7 @@ public class InterestsActivity extends AppCompatActivity
                 a=1;
             }
             else{}
-        }
+        }}
     }
 
 

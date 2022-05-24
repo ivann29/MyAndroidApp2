@@ -2,12 +2,17 @@ package be.kuleuven.myandroidapp2;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +20,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -24,6 +35,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 //check if u have thisjksjkd
 public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallback {
@@ -37,6 +56,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
     private GoogleMap mMap;
     private FusedLocationProviderClient myFusedLocationProviderClient;
     public String locationString;
+    private SharedPreferences newPreference;
 
     public void onMapReady(GoogleMap googleMap)
     {
@@ -66,6 +86,7 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
 
     }
 
+
     public String getLocationString()
     {return this.locationString;}
 
@@ -90,18 +111,53 @@ public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallba
                         {
                             Log.d(TAG, "onComplete: found location");
                             Location currentLocation = (Location) location.getResult();
-                            LatLng object = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-                            moveCamera(object,15f);
+                            LatLng latlong = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                            moveCamera(latlong,15f);
 
-                            /* LatLng latlong = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+
                             Geocoder geocoder = new Geocoder(MapsActivity2.this, Locale.getDefault());
                             try{
                                 List<Address> listAddresses = geocoder.getFromLocation( latlong.latitude, latlong.longitude,1);
-                                if(listAddresses.size()>0){ locationString  = listAddresses.get(0).getLocality();};
+                                if(listAddresses.size()>0)
+                                {
+                                    locationString  = listAddresses.get(0).getLocality();
+                                    newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
+                                    String email = newPreference.getString("email", null);
+
+                                    RequestQueue requestQueue;
+                                    requestQueue = Volley.newRequestQueue(MapsActivity2.this); //is it correct?
+                                    String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/insertLocation/";
+                                    String requestURL = SUBMIT_URL  +  locationString+ "/" + email;
+
+
+                                    JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+
+                                            new Response.Listener<JSONArray>() {
+                                                @Override
+                                                public void onResponse(JSONArray response)
+                                                {
+                                                    Log.d("Database","response received");
+                                                }
+
+
+                                            },
+
+                                            new Response.ErrorListener()
+                                            {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    Log.e("db", "error");
+                                                }
+                                            }
+                                    );
+
+
+                                    requestQueue.add(submitRequest);
+                                };
 
                             }
                             catch(IOException ex)
-                            {ex.printStackTrace();}*/
+                            {ex.printStackTrace();}
 
                         }
                         else

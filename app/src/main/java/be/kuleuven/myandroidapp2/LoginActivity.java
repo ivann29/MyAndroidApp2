@@ -59,7 +59,8 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             String responseEmail = "";
                             String responsePassword = "";
-                            for (int i = 0; i < response.length(); i++) {
+                            for (int i = 0; i < response.length(); i++)
+                            {
                                 Log.e("db", "inside responce");
 
                                 JSONObject curObject = response.getJSONObject(i);

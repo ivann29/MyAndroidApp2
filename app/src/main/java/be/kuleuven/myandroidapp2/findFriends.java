@@ -20,8 +20,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.firebase.database.DatabaseReference;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +39,7 @@ public class findFriends extends AppCompatActivity
     private RequestQueue requestQueue;
 
     private ArrayList<findFriends2> users;
-    private DatabaseReference allUsersDatabaseRef;
+
     private RecyclerViewAdapter adapter;
 
     @Override

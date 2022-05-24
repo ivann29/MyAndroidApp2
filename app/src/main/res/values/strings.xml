@@ -62,4 +62,21 @@
     <string name="singing">SINGING</string>
     <string name="select_your_interests">Select your interests!</string>
     <string name="select_when_you_are_free_to_hang_out">Select when you are free to hang out!</string>
+    <string name="confirm">Confirm</string>
+    <string name="open_the_map">Open the map!</string>
+    <string name="interests">INTERESTS</string>
+    <string name="free_time">FREE TIME</string>
+    <string name="check_position">Check position</string>
+    <string name="confirm_position">Confirm position</string>
+    <string name="imageselector">imageSelector</string>
+    <string name="save">SAVE</string>
+    <string-array name="menu_items">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>

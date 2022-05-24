@@ -33,6 +33,13 @@ public class MapsActivity extends AppCompatActivity {
 
     }
 
+    public void onConfirm (View caller)
+    {
+        Intent intent = new Intent(this, AccountActivity.class);
+        startActivity(intent);
+
+    }
+
     private void init()
     {
 

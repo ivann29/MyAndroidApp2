@@ -167,13 +167,15 @@ public class AddBlogsFragment extends Fragment {
         return view;
     }
 
-    private void showImagePicDialog() {
+    private void showImagePicDialog()
+    {
         String options[] = {"Camera", "Gallery"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Pick Image From");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(DialogInterface dialog, int which)
+            {
                 // check for the camera and storage permission if
                 // not given the request for permission
                 if (which == 0) {
@@ -313,7 +315,9 @@ public class AddBlogsFragment extends Fragment {
                 System.out.println("fail");
                // Toast.makeText(MainActivity.this, "Post request failed", Toast.LENGTH_LONG).show();
             }
-        }) { //NOTE THIS PART: here we are passing the parameter to the webservice, NOT in the URL!
+        })
+
+        { //NOTE THIS PART: here we are passing the parameter to the webservice, NOT in the URL!
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

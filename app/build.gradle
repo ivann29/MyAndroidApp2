@@ -9,6 +9,11 @@ android {
     dataBinding{
         enabled = true  //enable data binding
     }
+
+    defaultConfig {
+            vectorDrawables.useSupportLibrary = true
+        }
+
     defaultConfig {
         applicationId "be.kuleuven.myandroidapp2"
         minSdk 23

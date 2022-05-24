@@ -33,6 +33,8 @@ public class TestIvan extends AppCompatActivity {
     }
     public void onBtnNext(View caller) {
 
+        profilesUpdate(caller);
+
         EditText textEmail = (EditText) findViewById(R.id.emailET);
         EditText textPassword = (EditText) findViewById(R.id.passwordET);
         EditText textName = (EditText) findViewById(R.id.nameET);
@@ -73,6 +75,45 @@ public class TestIvan extends AppCompatActivity {
 
         requestQueue.add(submitRequest);
         Log.d("Database","response sent");
+    }
+
+
+    public void profilesUpdate(View caller)
+    {
+        String SUBMIT_URL2 = "https://studev.groept.be/api/a21pt206/signUpAffectsProfiles/";
+        EditText textEmail = (EditText) findViewById(R.id.emailET);
+
+        requestQueue = Volley.newRequestQueue(this);
+
+        Bundle info = getIntent().getExtras();
+
+        String requestURL = SUBMIT_URL2  + textEmail.getText();
+
+        Log.d("Database","creating response");
+
+        StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        Log.d("Database","response received");
+
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+
+        );
+
+
+        requestQueue.add(submitRequest);
+        Log.d("Database","response sent");
+
     }
 
 

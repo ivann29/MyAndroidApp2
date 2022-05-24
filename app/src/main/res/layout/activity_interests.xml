@@ -10,121 +10,174 @@
         android:id="@+id/sports"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="156dp"
         android:backgroundTint="#DAA1D0"
         android:onClick="onSports_clicked"
-        android:text="@string/sports"
+        android:text="sports"
+        app:layout_constraintEnd_toStartOf="@+id/art"
+        app:layout_constraintHorizontal_bias="0.312"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/tendina"
+        android:layout_width="755dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="false"
+        android:contentDescription="@string/tendina"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tendina"
+        tools:ignore="ImageContrastCheck" />
 
     <Button
         android:id="@+id/music"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="220dp"
-        android:text="@string/music"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="44dp"
+        android:backgroundTint="#DAA1D0"
+        android:onClick="musicBtn_clicked"
+        android:text="music"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.794"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/art" />
 
     <Button
         android:id="@+id/extremeSports"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/extreme_sports"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/acting"
-        app:layout_constraintHorizontal_bias="0.43"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#DAA1D0"
+        android:onClick="extremeSportsbtn_clicked"
+        android:text="extreme sports"
+        app:layout_constraintEnd_toStartOf="@+id/music"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36" />
+        app:layout_constraintTop_toBottomOf="@+id/art"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/acting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="276dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#DAA1D0"
         android:onClick="actingBtn_Clicked"
-        android:text="@string/acting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/music" />
+        android:text="acting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sing"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/art"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="52dp"
         android:backgroundTint="#D68DCD"
         android:onClick="onArtBtn_Clicked"
-        android:text="@string/art"
+        android:text="art"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.794"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/movies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#DAA1D0"
         android:onClick="moviesBtn_Clicked"
-        android:text="@string/tv_series_and_movies"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.865"
+        android:text="tv series and movies"
+        app:layout_constraintEnd_toStartOf="@+id/acting"
+        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/politics"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/business"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="332dp"
-        android:text="@string/business"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#DAA1D0"
+        android:onClick="businessBtn_Clicked"
+        android:text="business"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/extremeSports"
+        tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck" />
 
     <Button
         android:id="@+id/politics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="412dp"
-        android:text="@string/politics"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#D68DCD"
+        android:onClick="politicsBtn_clicked"
+        android:text="politics"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/business"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/foodDrinks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="212dp"
-        android:layout_marginBottom="80dp"
-        android:text="@string/food_and_drinks"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#DAA1D0"
+        android:onClick="foodDrinksBtn_clicked"
+        android:text="food and drinks"
+        app:layout_constraintEnd_toEndOf="@+id/music"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/business"
+        app:layout_constraintTop_toBottomOf="@+id/music"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/sing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="64dp"
-        android:layout_marginBottom="212dp"
-        android:text="@string/singing"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#DAA1D0"
+        android:onClick="singBtn_Clicked"
+        android:text="singing"
+        app:layout_constraintEnd_toEndOf="@+id/foodDrinks"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/politics"
+        app:layout_constraintTop_toBottomOf="@+id/foodDrinks"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/confirmButton"
+        android:layout_width="216dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#D53E7E"
+        android:onClick="onCofirm_clicked"
+        android:text="@string/confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movies" />
+
+    <TextView
+        android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="592dp"
-        android:onClick="onCofirm_clicked"
-        android:text="Confirm"
+        android:layout_marginTop="21dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Please select three of your interests!"
+        android:textColor="#D53E7E"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tendina" />
 </androidx.constraintlayout.widget.ConstraintLayout>
