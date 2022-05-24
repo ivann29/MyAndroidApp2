@@ -1,4 +1,4 @@
-package be.kuleuven.myandroidapp2;
+package models;
 
 public class ModelPost {
     public ModelPost() {

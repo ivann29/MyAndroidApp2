@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".Dash">
+    tools:context="fragments.Dash">
 
     <FrameLayout
         android:id="@+id/content"

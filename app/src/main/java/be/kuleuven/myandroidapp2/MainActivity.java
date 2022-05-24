@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity
     
     public void onLoginButton_Clicked  (View caller)
     {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, LogIn.class);
         //intent.putExtra("Order",order);
         startActivity(intent);
 

@@ -3,7 +3,7 @@
     <item
         android:id="@+id/nav_users"
 
-        android:title="Users" />
+        android:title="Interests" />
     <item
         android:id="@+id/nav_home"
 
@@ -21,6 +21,6 @@
     <item
         android:id="@+id/nav_profile"
 
-        android:title="Profile" />
+        android:title="Free time" />
 
 </menu>

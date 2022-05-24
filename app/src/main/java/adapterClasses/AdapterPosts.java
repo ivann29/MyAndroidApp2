@@ -1,4 +1,4 @@
-package be.kuleuven.myandroidapp2;
+package adapterClasses;
 
 
 import android.content.Context;
@@ -31,7 +31,10 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.List;
 
-public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2.AdapterPosts.MyHolder> {
+import be.kuleuven.myandroidapp2.R;
+import models.ModelPost;
+
+public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
     Context context;
     String myuid;
@@ -114,26 +117,27 @@ public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2
 
             private RequestQueue requestQueue;
             private static final String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/likes/";
-            int check =1;
+            int check = 1;
+
             @Override
             public void onClick(View v) {
                 int plike = Integer.parseInt(modelPosts.get(holder.getAdapterPosition()).getPlike());
 
-                if(check ==1) {
+                if (check == 1) {
 
                     plike += 1;
                     String l = Integer.toString(plike);
                     requestQueue = Volley.newRequestQueue(v.getContext());
-                    String requestURL = SUBMIT_URL  +
-                            l  +"/" +
-                            modelPosts.get(holder.getAdapterPosition()).getTitle() ;
-                    Log.d("Database","creating response");
+                    String requestURL = SUBMIT_URL +
+                            l + "/" +
+                            modelPosts.get(holder.getAdapterPosition()).getTitle();
+                    Log.d("Database", "creating response");
 
                     StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
-                                    Log.d("Database","response received");
+                                    Log.d("Database", "response received");
                                     System.out.println("success");
                                 }
                             },
@@ -149,23 +153,22 @@ public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2
 
 
                     requestQueue.add(submitRequest);
-                    Log.d("Database","response sent");
+                    Log.d("Database", "response sent");
 
                     modelPosts.get(holder.getAdapterPosition()).setPlike(l);
                     holder.like.setText(plike + " Likes");
 
-                    check =0;
-                }
-                else{
+                    check = 0;
+                } else {
 
-                    plike = plike-1;
+                    plike = plike - 1;
                     String l = Integer.toString(plike);
                     modelPosts.get(holder.getAdapterPosition()).setPlike(l);
                     holder.like.setText(plike + " Likes");
-                    check =1;
+                    check = 1;
 
                 }
-                    //plike += 1;
+                //plike += 1;
 
                /*  int plike = Integer.parseInt(modelPosts.get(position).getPlike());
                 plike += 1;
@@ -230,9 +233,6 @@ public class AdapterPosts extends RecyclerView.Adapter<be.kuleuven.myandroidapp2
         });
         popupMenu.show();
     }
-
-
-
 
 
     @Override

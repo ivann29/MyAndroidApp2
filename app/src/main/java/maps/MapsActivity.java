@@ -1,6 +1,4 @@
-package be.kuleuven.myandroidapp2;
-
-import androidx.appcompat.app.AppCompatActivity;
+package maps;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -10,8 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+
+import be.kuleuven.myandroidapp2.AccountActivity;
+import be.kuleuven.myandroidapp2.R;
 
 
 public class MapsActivity extends AppCompatActivity {

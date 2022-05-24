@@ -1,10 +1,12 @@
 package be.kuleuven.myandroidapp2;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import fragments.Dash;
 
 public class Menu extends AppCompatActivity {
 
@@ -25,6 +27,7 @@ public class Menu extends AppCompatActivity {
 
     public void onAccount_btn_Clicked (View caller)
     {
+
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
 
@@ -32,8 +35,18 @@ public class Menu extends AppCompatActivity {
 
     public void onCommonInterests_Clicked(View caller)
     {
+
         Intent intent= new Intent(this, Dash.class);
+
         startActivity(intent);
+
+        /*startActivityFromFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        Fragment fraggy = new AddBlogsFragment();
+        fragmentTransaction.add(R.id.fragment_container, fraggy);
+        fragmentTransaction.commit();*/
     }
 
 

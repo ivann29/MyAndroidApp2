@@ -1,4 +1,4 @@
-package be.kuleuven.myandroidapp2;
+package maps;
 
 import android.Manifest;
 import android.content.Context;
@@ -43,6 +43,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import be.kuleuven.myandroidapp2.R;
 
 //check if u have thisjksjkd
 public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallback {

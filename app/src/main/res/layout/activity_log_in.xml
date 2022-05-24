@@ -5,7 +5,7 @@
     android:background="@drawable/ic_quantum_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="basic.LoginActivity">
+    tools:context="be.kuleuven.myandroidapp2.LogIn">
 
     <ImageView
         android:id="@+id/logo"

@@ -1,4 +1,4 @@
-package be.kuleuven.myandroidapp2;
+package fragments;
 
 
 import android.Manifest;
@@ -44,6 +44,8 @@ import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+
+import be.kuleuven.myandroidapp2.R;
 
 //import com.google.firebase.storage.FirebaseStorage;
 //import com.google.firebase.storage.StorageReference;

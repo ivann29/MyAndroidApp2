@@ -1,4 +1,4 @@
-package be.kuleuven.myandroidapp2;
+package adapterClasses;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import be.kuleuven.myandroidapp2.R;
+import be.kuleuven.myandroidapp2.findFriends2;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>
 {

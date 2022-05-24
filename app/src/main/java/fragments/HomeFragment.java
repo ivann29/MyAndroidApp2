@@ -1,4 +1,4 @@
-package be.kuleuven.myandroidapp2;
+package fragments;
 
 
 import android.os.Bundle;
@@ -25,6 +25,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import adapterClasses.AdapterPosts;
+import be.kuleuven.myandroidapp2.R;
+import models.ModelPost;
 
 /**
  * A simple {@link Fragment} subclass.

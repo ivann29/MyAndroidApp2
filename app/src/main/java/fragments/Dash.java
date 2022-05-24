@@ -1,4 +1,4 @@
-package be.kuleuven.myandroidapp2;
+package fragments;
 
 
 
@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import be.kuleuven.myandroidapp2.R;
 
 public class Dash extends AppCompatActivity {
 

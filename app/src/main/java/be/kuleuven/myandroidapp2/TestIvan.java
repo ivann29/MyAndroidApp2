@@ -26,7 +26,7 @@ public class TestIvan extends AppCompatActivity {
     }
     public void onBackLoginButton_Clicked  (View caller)
     {
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         //intent.putExtra("Order",order);
         startActivity(intent);
 
