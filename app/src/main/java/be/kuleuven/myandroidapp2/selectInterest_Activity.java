@@ -1,10 +1,12 @@
 package be.kuleuven.myandroidapp2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +59,7 @@ public class selectInterest_Activity extends AppCompatActivity
     {
         newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
         String email = newPreference.getString("email", null);
+        Shared_pref = getSharedPreferences("details", MODE_PRIVATE);
 
 
         requestQueue = Volley.newRequestQueue(this);
@@ -80,7 +83,13 @@ public class selectInterest_Activity extends AppCompatActivity
 
                                 JSONObject curObject = response.getJSONObject(i);
                                 responseInterests += curObject.getString("interests");
-                                System.out.print(responseInterests);
+                                tokens = responseInterests.split(",",5);
+                                for (String a : tokens)
+                                    System.out.println(a);
+
+                                interest1.setText(tokens[0]);
+                                interest2.setText(tokens[1]);
+                                interest3.setText(tokens[2]);
 
 
                             }
@@ -106,19 +115,18 @@ public class selectInterest_Activity extends AppCompatActivity
 
         requestQueue.add(submitRequest);
 
-       /*tokens = responseInterests.split(",");
 
-        System.out.print(tokens);
 
-        interest1.setText(tokens[0]);
-        System.out.print(interest1);
-        interest2.setText(tokens[1]);
-        interest3.setText(tokens[2]);*/
     }
 
 
     public void onInterest1_Clicked (View caller)
     {
+        Drawable buttonDrawable = interest1.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.gold));
+        interest1.setBackground(buttonDrawable);
+
         String interest = tokens[0];
         SharedPreferences.Editor editor = Shared_pref.edit();
         editor.putString("selectedInterest", interest);
@@ -129,6 +137,11 @@ public class selectInterest_Activity extends AppCompatActivity
 
     public void onInterest2_Clicked (View caller)
     {
+        Drawable buttonDrawable = interest2.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.gold));
+        interest2.setBackground(buttonDrawable);
+
         String interest = tokens[1];
         SharedPreferences.Editor editor = Shared_pref.edit();
         editor.putString("selectedInterest", interest);
@@ -139,6 +152,12 @@ public class selectInterest_Activity extends AppCompatActivity
 
     public void onInterest3_Clicked (View caller)
     {
+
+        Drawable buttonDrawable = interest3.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.gold));
+        interest3.setBackground(buttonDrawable);
+
         String interest = tokens[2];
         SharedPreferences.Editor editor = Shared_pref.edit();
         editor.putString("selectedInterest", interest);

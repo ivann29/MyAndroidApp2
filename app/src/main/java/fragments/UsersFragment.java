@@ -67,7 +67,7 @@ public class UsersFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         usersList = new ArrayList<>();
         //firebaseAuth = FirebaseAuth.getInstance();
-        getInterests();
+        //getInterests();
         getAllUsers();
         System.out.println("hey2");
         return view;
@@ -160,12 +160,12 @@ public class UsersFragment extends Fragment {
 
 
                                 JSONObject curObject = response.getJSONObject(i);
-                                id += curObject.getString("idaccounts");
+                                id += curObject.getString("idprofiles");
                                 location += curObject.getString("location");
                                 interests += curObject.getString("interests");
-                                freeTime += curObject.getString("freeTime");
-                                email += curObject.getString("emailaccounts");
-                                image += curObject.getString("profilepicture");
+                                freeTime += curObject.getString("freetime");
+                                email += curObject.getString("emaill");
+                                image += curObject.getString("profileImage");
 
 
                                 //System.out.println(title);
