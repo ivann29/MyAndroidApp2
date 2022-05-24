@@ -137,7 +137,8 @@ public class UsersFragment extends Fragment {
        newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
         String email = newPreference.getString("email", null);
         String password = newPreference.getString("password", null);
-        String requestURL = QUEUE_URL+email+ "/"+interest1 ;
+        String interest = newPreference.getString("selectedInterest", null);
+        String requestURL = QUEUE_URL+email+ "/"+interest ;
         System.out.println(requestURL);
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,

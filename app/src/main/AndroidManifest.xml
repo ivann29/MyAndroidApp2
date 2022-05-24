@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyAndroidApp2">
         <activity
+            android:name=".selectInterest_Activity"
+            android:exported="false" />
+        <activity
             android:name=".LogIn"
             android:exported="false" />
         <activity
@@ -42,16 +45,19 @@
             android:exported="false" />
         <activity
             android:name="maps.MapsActivity2"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName="maps.MapsActivity" />
         <activity
             android:name="maps.MapsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".AccountActivity" />
         <activity
             android:name=".TestIvan"
             android:exported="false" />
         <activity
             android:name=".AccountActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".Menu" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

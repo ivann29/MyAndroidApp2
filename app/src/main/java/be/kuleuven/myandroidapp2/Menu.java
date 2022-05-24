@@ -36,7 +36,7 @@ public class Menu extends AppCompatActivity {
     public void onCommonInterests_Clicked(View caller)
     {
 
-        Intent intent= new Intent(this, Dash.class);
+        Intent intent= new Intent(this, selectInterest_Activity.class);
 
         startActivity(intent);
 

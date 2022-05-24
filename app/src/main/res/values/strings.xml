@@ -71,6 +71,7 @@
     <string name="imageselector">imageSelector</string>
     <string name="save">SAVE</string>
     <string-array name="menu_items">
+        <item>  </item>
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>

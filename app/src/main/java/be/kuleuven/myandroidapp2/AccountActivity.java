@@ -64,6 +64,7 @@ public class AccountActivity extends AppCompatActivity
 
 
 
+
 //gnegnegne
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -97,9 +98,15 @@ public class AccountActivity extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
+                //init4();
+                //if(!userFreeTime.equals("Select when your are free to hang out!")){}
                 selected = parent.getItemAtPosition(position).toString();
-                userFreeTime.setText(selected);
+                if(position!=0)
+                {
+                    userFreeTime.setText(selected);
                 updateTime();
+
+                }
 
 
             }
