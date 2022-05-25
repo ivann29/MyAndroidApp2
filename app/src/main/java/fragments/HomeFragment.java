@@ -1,6 +1,7 @@
 package fragments;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ public class HomeFragment extends Fragment {
     RecyclerView recyclerView;
     List<ModelPost> posts;
     AdapterPosts adapterPosts;
+    private  ProgressDialog progressDialog;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -60,8 +62,13 @@ public class HomeFragment extends Fragment {
         layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
         posts = new ArrayList<>();
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading, please wait");
+        progressDialog.show();
         loadPosts();
+
         return view;
+
     }
 
     private void loadPosts() {
@@ -79,6 +86,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                              progressDialog.dismiss();
 
 
                             for (int i = 0; i < response.length(); i++) {

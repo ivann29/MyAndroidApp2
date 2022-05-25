@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,14 +16,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class TestIvan extends AppCompatActivity {
     private RequestQueue requestQueue;
     private static final String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/SignUp/";
+    private int minLength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_ivan);
+        minLength=8;
     }
     public void onBackLoginButton_Clicked  (View caller)
     {
@@ -40,6 +46,20 @@ public class TestIvan extends AppCompatActivity {
         EditText textName = (EditText) findViewById(R.id.nameET);
         EditText textGender = (EditText) findViewById(R.id.genderET);
         EditText textAge = (EditText) findViewById(R.id.ageET);
+
+
+        if ((!isEmailValid(textEmail.toString())))
+        {
+            Toast.makeText(this,  "Your Email Id is Invalid", Toast.LENGTH_SHORT).show();
+        }
+        else if (textPassword.length()<minLength)
+        {
+            Toast.makeText(this,  "Your password should be of minimum 8 characters", Toast.LENGTH_LONG).show();
+
+        }
+
+
+        else{
 
         requestQueue = Volley.newRequestQueue(this);
 
@@ -75,6 +95,12 @@ public class TestIvan extends AppCompatActivity {
 
         requestQueue.add(submitRequest);
         Log.d("Database","response sent");
+    }}
+
+    boolean isEmailValid(CharSequence email)
+    {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+
     }
 
 
@@ -115,6 +141,8 @@ public class TestIvan extends AppCompatActivity {
         Log.d("Database","response sent");
 
     }
+
+
 
 
 

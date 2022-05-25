@@ -9,50 +9,55 @@
     <Button
         android:id="@+id/interest1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="#D53E7E"
         android:onClick="onInterest1_Clicked"
-        android:text="Button"
+        android:text="button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tendina" />
 
     <Button
         android:id="@+id/interest2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="#D53E7E"
         android:onClick="onInterest2_Clicked"
-        android:text="Button"
-        app:layout_constraintStart_toEndOf="@+id/interest1"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:text="button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/interest1" />
 
     <Button
         android:id="@+id/interest3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="49dp"
-        android:layout_marginTop="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="#D53E7E"
         android:onClick="onInterest3_Clicked"
-        android:text="Button"
-        app:layout_constraintStart_toEndOf="@+id/interest2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        android:text="button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/interest2" />
+
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search Users that have this interest in common with you"
+        android:layout_width="320dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="170dp"
+        android:text="@string/search_users_that_have_this_interest_in_common_with_you"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.393"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.279" />
+        app:layout_constraintTop_toBottomOf="@+id/interest3" />
 
     <Button
         android:id="@+id/searchInterestFriends"
@@ -60,22 +65,37 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#D53E7E"
         android:onClick="onContinueBtn_Clicked"
-        android:text="search people with selected interest"
+        android:text="Search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/interest2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.196" />
 
     <Button
         android:id="@+id/searchTimeFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#D53E7E"
         android:onClick="onSkipBtn_Clicked"
-        android:text="Skip and search people with same free time as you"
+        android:text="Skip"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchInterestFriends" />
+        app:layout_constraintTop_toBottomOf="@+id/searchInterestFriends"
+        tools:ignore="TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/tendina"
+        android:layout_width="755dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="false"
+        android:contentDescription="@string/tendina"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tendina"
+        tools:ignore="ImageContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package fragments;
 
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -54,12 +56,14 @@ public class UsersFragment extends Fragment {
     private static final String QUEUE_URL2 = "https://studev.groept.be/api/a21pt206/findInterest/";
     private SharedPreferences newPreference;
     protected  String interest1;
+    private ProgressDialog progressDialog;
     public UsersFragment() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_users, container, false);
         recyclerView = view.findViewById(R.id.recyclep);
@@ -68,11 +72,25 @@ public class UsersFragment extends Fragment {
         usersList = new ArrayList<>();
         //firebaseAuth = FirebaseAuth.getInstance();
         //getInterests();
+        newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
+
+        String interest = newPreference.getString("selectedInterest", null);
+        if( interest.equals("null") )
+        {
+           // Toast.makeText(getActivity(), "No user matches selected interests", Toast.LENGTH_SHORT).show();
+
+        }
+        else{
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Loading, please wait");
+            progressDialog.show();
+        }
         getAllUsers();
         System.out.println("hey2");
         return view;
     }
-    private void getInterests(){
+    private void getInterests()
+    {
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
 
@@ -86,7 +104,8 @@ public class UsersFragment extends Fragment {
 
                 new Response.Listener<JSONArray>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONArray response)
+                    {
                         try {
 
 
@@ -128,7 +147,8 @@ public class UsersFragment extends Fragment {
         requestQueue.add(submitRequest);
 
     }
-    private void getAllUsers() {
+    private void getAllUsers()
+    {
         System.out.println("hey");
         requestQueue1 = Volley.newRequestQueue(getActivity().getApplicationContext());
 
@@ -138,15 +158,27 @@ public class UsersFragment extends Fragment {
         String email = newPreference.getString("email", null);
         String password = newPreference.getString("password", null);
         String interest = newPreference.getString("selectedInterest", null);
-        String requestURL = QUEUE_URL+email+ "/"+interest ;
+
+        System.out.println(interest);
+        String requestURL = QUEUE_URL+email+ "/" + interest ;
         System.out.println(requestURL);
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
 
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONArray>()
+                {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+
+                            if(response.length()==0)
+                            {
+                                Toast.makeText(getActivity(), "No user matches selected interests", Toast.LENGTH_SHORT).show();
+
+                            }
+                            else{
+                                progressDialog.dismiss();
+                            }
 
 
                             for (int i = 0; i < response.length(); i++) {
@@ -177,6 +209,8 @@ public class UsersFragment extends Fragment {
 
 
                             }
+
+
 
 
 

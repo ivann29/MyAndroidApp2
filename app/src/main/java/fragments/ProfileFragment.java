@@ -2,6 +2,7 @@ package fragments;
 
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class ProfileFragment extends Fragment {
     private static final String QUEUE_URL2 = "https://studev.groept.be/api/a21pt206/findDay/";
     private SharedPreferences newPreference;
     protected  String interest1;
+    private ProgressDialog progressDialog;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -66,7 +68,9 @@ public class ProfileFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         usersList = new ArrayList<>();
-        //firebaseAuth = FirebaseAuth.getInstance();
+         progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading, please wait");
+        progressDialog.show();
         getInterests();
         getAllUsers();
         System.out.println("hey2");
@@ -146,6 +150,7 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
+                            progressDialog.dismiss();
 
 
                             for (int i = 0; i < response.length(); i++) {

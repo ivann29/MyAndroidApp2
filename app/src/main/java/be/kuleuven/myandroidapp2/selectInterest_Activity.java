@@ -36,13 +36,14 @@ public class selectInterest_Activity extends AppCompatActivity
     private SharedPreferences Shared_pref;
     private RequestQueue requestQueue;
     private static final String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/retrieveInterestUserLoggedIn/";
-
+    private int a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_interest);
+        a=0;
         interest1 = (Button) findViewById(R.id.interest1);
         interest2 = (Button) findViewById(R.id.interest2);
         interest3 = (Button) findViewById(R.id.interest3);
@@ -83,7 +84,7 @@ public class selectInterest_Activity extends AppCompatActivity
 
                                 JSONObject curObject = response.getJSONObject(i);
                                 responseInterests += curObject.getString("interests");
-                                tokens = responseInterests.split(",",5);
+                                tokens = responseInterests.split(",", 5);
                                 for (String a : tokens)
                                     System.out.println(a);
 
@@ -122,6 +123,8 @@ public class selectInterest_Activity extends AppCompatActivity
 
     public void onInterest1_Clicked (View caller)
     {
+        if(a==0)
+        {
         Drawable buttonDrawable = interest1.getBackground();
         buttonDrawable = DrawableCompat.wrap(buttonDrawable);
         DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.gold));
@@ -131,12 +134,16 @@ public class selectInterest_Activity extends AppCompatActivity
         SharedPreferences.Editor editor = Shared_pref.edit();
         editor.putString("selectedInterest", interest);
         editor.apply();
+        a=a+1;
+        }
 
     }
 
 
     public void onInterest2_Clicked (View caller)
     {
+        if(a==0)
+        {
         Drawable buttonDrawable = interest2.getBackground();
         buttonDrawable = DrawableCompat.wrap(buttonDrawable);
         DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.gold));
@@ -146,12 +153,16 @@ public class selectInterest_Activity extends AppCompatActivity
         SharedPreferences.Editor editor = Shared_pref.edit();
         editor.putString("selectedInterest", interest);
         editor.apply();
+        a=a+1;
+        }
 
 
     }
 
     public void onInterest3_Clicked (View caller)
     {
+        if(a==0)
+        {
 
         Drawable buttonDrawable = interest3.getBackground();
         buttonDrawable = DrawableCompat.wrap(buttonDrawable);
@@ -162,6 +173,8 @@ public class selectInterest_Activity extends AppCompatActivity
         SharedPreferences.Editor editor = Shared_pref.edit();
         editor.putString("selectedInterest", interest);
         editor.apply();
+        a=a+1;
+        }
 
     }
 
@@ -178,6 +191,10 @@ public class selectInterest_Activity extends AppCompatActivity
 
     public void onSkipBtn_Clicked(View caller)
     {
+        String interest = "null";
+        SharedPreferences.Editor editor = Shared_pref.edit();
+        editor.putString("selectedInterest", interest);
+        editor.apply();
         Intent intent= new Intent(this, Dash.class);
 
         startActivity(intent);

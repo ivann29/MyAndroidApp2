@@ -70,6 +70,12 @@
     <string name="confirm_position">Confirm position</string>
     <string name="imageselector">imageSelector</string>
     <string name="save">SAVE</string>
+    <string name="search_users_that_have_this_interest_in_common_with_you">Search Users that have this interest in common with you</string>
+    <string name="search_people_with_selected_interest">search people with selected interest</string>
+    <string name="button1">Button</string>
+    <string name="button2">Button</string>
+    <string name="button3">Button</string>
+    <string name="skip_and_search_people_with_same_free_time_as_you">Skip and search people with same free time as you</string>
     <string-array name="menu_items">
         <item>  </item>
         <item>Monday</item>
