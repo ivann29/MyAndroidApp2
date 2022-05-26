@@ -14,6 +14,7 @@
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#fff</color>
     <color name="colorSelected">#D53E7E</color>
+    <color name="colorUnSelected">#DAA1D0</color>
     <color name="gold">#D19F09</color>
 
 

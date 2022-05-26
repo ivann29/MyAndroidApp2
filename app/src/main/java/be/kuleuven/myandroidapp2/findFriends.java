@@ -34,7 +34,7 @@ public class findFriends extends AppCompatActivity
     private EditText searchInputText;
     private RecyclerView recyclerView;
     private ImageButton searchButton;
-    private static final String QUEUE_URL = "https://studev.groept.be/api/a21pt206/searchPeople/";
+    private static final String QUEUE_URL = "https://studev.groept.be/api/a21pt206/search/";
     private RequestQueue requestQueue;
 
     private ArrayList<findFriends2> users;
@@ -76,51 +76,48 @@ public class findFriends extends AppCompatActivity
                 {
                     @Override
                     public void onResponse(JSONArray response) {
-                        try {
+                        try
+                        {
+                            Iterator<findFriends2> it= users.iterator();
+                            while(it.hasNext())
+                            {
+                                findFriends2 element= it.next();
+                                it.remove();
+                            }
+
                             String responseEmail = "";
 
                             for (int i = 0; i < response.length(); i++)
                             {
+                                 responseEmail = "";
                                 Log.e("db", "inside responce");
 
                                 JSONObject curObject = response.getJSONObject(i);
                                 responseEmail += curObject.getString("email");
-                               // System.out.println(responseEmail);
+
+                                System.out.println(responseEmail);
 
 
-                            }
 
 
-                            if (!responseEmail.equals(""))
-                            {
-                                Iterator<findFriends2> it= users.iterator();
-                                while(it.hasNext())
-                                {
-                                    findFriends2 element= it.next();
-                                    it.remove();
-                                }
-
-                                for (int i = 0; i < response.length(); i++)
+                                if (!responseEmail.equals(""))
                                 {
 
-
-                                    JSONObject curObject = response.getJSONObject(i);
-                                    responseEmail += curObject.getString("email");
                                     findFriends2 UserToAdd = new findFriends2(responseEmail);
-
-
                                     users.add(UserToAdd);
                                     setAdapter();
-                                    System.out.println(responseEmail);
-
-
                                 }
 
-                            }
+
+                            }}
 
 
-                        }
-                        catch (JSONException e) {
+
+
+
+
+                        catch (JSONException e)
+                        {
                             Log.e("Database", e.getMessage(), e);
                         }
                     }
@@ -146,6 +143,7 @@ public class findFriends extends AppCompatActivity
 
         //adapter = new RecyclerViewAdapter(this, users);
         recyclerView.setAdapter(adapter);
+
     }
 
 

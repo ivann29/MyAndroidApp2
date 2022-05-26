@@ -9,7 +9,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,6 +69,7 @@ public class InterestsActivity extends AppCompatActivity
 
 
 
+
     public void onCofirm_clicked(View caller)
     {
         newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
@@ -111,9 +115,65 @@ public class InterestsActivity extends AppCompatActivity
 
     }
 
-    @SuppressLint("ResourceAsColor")
+
+
+    public boolean isAlreadyThere(Button btn)
+    {
+        for (int i = 0; i<array.length; i++ )
+        {
+            if(array[i]==btn.getText().toString())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int whereIsIt(Button btn)
+    {
+        for (int i = 0; i<array.length; i++ )
+        {
+            if(array[i]==btn.getText().toString())
+            {
+                return i;
+            }
+        }
+        return -1;
+
+    }
+
+    public void changeColorSelected(Button btn)
+    {
+        Drawable buttonDrawable = btn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
+        btn.setBackground(buttonDrawable);
+
+    }
+
+
+    public void changeColorUnSelected(Button btn)
+    {
+        Drawable buttonDrawable = btn.getBackground();
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
+        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorUnSelected));
+        btn.setBackground(buttonDrawable);
+
+    }
+
+
+
+
     public void politicsBtn_clicked   (View caller)
     {
+        boolean check=false;
+        if(isAlreadyThere(politicsbtn))
+        {
+            changeColorUnSelected(politicsbtn);
+            array[whereIsIt(politicsbtn)]="";
+            check=true;
+        }
+
         int b=0;
         for(int i = 0; i<array.length; i++ )
 
@@ -124,31 +184,36 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
         if (b==3){}
-        else{
 
-        Drawable buttonDrawable = politicsbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        politicsbtn.setBackground(buttonDrawable);
-
-        int a=0;
-
-        for(int i = 0; i<array.length; i++ )
-
+        else if(!check)
         {
-            if(array[i].equals("") && a==0)
+           changeColorSelected(politicsbtn);
+            int a=0;
+
+            for(int i = 0; i<array.length; i++ )
+
             {
-                array[i]=politicsbtn.getText().toString();
-                a=1;
-            }
-            else{}
-        }
-        }
+                if(array[i].equals("") && a==0)
+                {
+                    array[i]=politicsbtn.getText().toString();
+                    a=1;
+                }
+                else{}
+            }}
     }
 
     public void musicBtn_clicked   (View caller)
     {
+        boolean check=false;
+        if(isAlreadyThere(musicbtn)==true)
+        {
+            changeColorUnSelected(musicbtn);
+            array[whereIsIt(musicbtn)]="";
+            check=true;
+        }
+
         int b=0;
         for(int i = 0; i<array.length; i++ )
 
@@ -159,12 +224,14 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
+
+
         if (b==3){}
-        else{
-        Drawable buttonDrawable = musicbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        musicbtn.setBackground(buttonDrawable);
+        else if(!check)
+        {
+
+            changeColorSelected(musicbtn);
         int a=0;
 
         for(int i = 0; i<array.length; i++ )
@@ -184,6 +251,13 @@ public class InterestsActivity extends AppCompatActivity
 
     public void extremeSportsbtn_clicked   (View caller)
     {
+        boolean check=false;
+        if(isAlreadyThere(extremesportsbtn)==true)
+        {
+            changeColorUnSelected(extremesportsbtn);
+            array[whereIsIt(extremesportsbtn)]="";
+            check=true;
+        }
         int b=0;
         for(int i = 0; i<array.length; i++ )
 
@@ -194,13 +268,15 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
+
+
+
         if (b==3){}
-        else{
-        Drawable buttonDrawable = extremesportsbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        extremesportsbtn.setBackground(buttonDrawable);
-        int a=0;
+        else if(!check)
+        {
+          changeColorSelected(extremesportsbtn);
+          int a=0;
 
         for(int i = 0; i<array.length; i++ )
 
@@ -217,6 +293,14 @@ public class InterestsActivity extends AppCompatActivity
 
     public void foodDrinksBtn_clicked   (View caller)
     {
+        boolean check = false;
+        if(isAlreadyThere(foodbtn)==true)
+        {
+            changeColorUnSelected(foodbtn);
+            array[whereIsIt(foodbtn)]="";
+            check=true;
+        }
+
         int b=0;
         for(int i = 0; i<array.length; i++ )
 
@@ -227,12 +311,12 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
+
+
         if (b==3){}
-        else{
-        Drawable buttonDrawable = foodbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        foodbtn.setBackground(buttonDrawable);
+         else if(!check){
+        changeColorSelected(foodbtn);
         int a=0;
 
         for(int i = 0; i<array.length; i++ )
@@ -251,7 +335,14 @@ public class InterestsActivity extends AppCompatActivity
 
     public void singBtn_Clicked   (View caller)
     {
+        boolean check=false;
         int b=0;
+        if(isAlreadyThere(signbtn)==true)
+        {
+            changeColorUnSelected(signbtn);
+            array[whereIsIt(signbtn)]="";
+            check=true;
+        }
         for(int i = 0; i<array.length; i++ )
 
         {
@@ -261,12 +352,13 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
+
+
         if (b==3){}
-        else{
-        Drawable buttonDrawable = signbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        signbtn.setBackground(buttonDrawable);
+
+        else if(!check) {
+       changeColorSelected(signbtn);
         int a=0;
 
         for(int i = 0; i<array.length; i++ )
@@ -285,7 +377,14 @@ public class InterestsActivity extends AppCompatActivity
 
     public void businessBtn_Clicked   (View caller)
     {
+        boolean check=false;
         int b=0;
+        if(isAlreadyThere(businessbtn)==true)
+        {
+            changeColorUnSelected(businessbtn);
+            array[whereIsIt(businessbtn)]="";
+            check=true;
+        }
         for(int i = 0; i<array.length; i++ )
 
         {
@@ -295,12 +394,12 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
+
+
         if (b==3){}
-        else{
-        Drawable buttonDrawable = businessbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        businessbtn.setBackground(buttonDrawable);
+         else if(!check){
+        changeColorSelected(businessbtn);
         int a=0;
 
         for(int i = 0; i<array.length; i++ )
@@ -323,7 +422,15 @@ public class InterestsActivity extends AppCompatActivity
 
     public void onSports_clicked   (View caller)
     {
+        boolean check=false;
         int b=0;
+
+        if(isAlreadyThere(sportsbtn)==true)
+        {
+            changeColorUnSelected(sportsbtn);
+            array[whereIsIt(sportsbtn)]="";
+            check=true;
+        }
         for(int i = 0; i<array.length; i++ )
 
         {
@@ -333,12 +440,12 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
+
+
         if (b==3){}
-        else{
-        Drawable buttonDrawable = sportsbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        sportsbtn.setBackground(buttonDrawable);
+         else if(!check) {
+        changeColorSelected(sportsbtn);
         int a=0;
 
         for(int i = 0; i<array.length; i++ )
@@ -355,7 +462,15 @@ public class InterestsActivity extends AppCompatActivity
 
     public void actingBtn_Clicked   (View caller)
     {
+        boolean check=false;
         int b=0;
+        if(isAlreadyThere(actingbtn)==true)
+        {
+            changeColorUnSelected(actingbtn);
+            array[whereIsIt(actingbtn)]="";
+            check=true;
+        }
+
         for(int i = 0; i<array.length; i++ )
 
         {
@@ -365,12 +480,14 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
+
+
         if (b==3){}
-        else{
-        Drawable buttonDrawable = actingbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        actingbtn.setBackground(buttonDrawable);
+
+         else if(!check){
+
+             changeColorSelected(actingbtn);
 
         int a=0;
 
@@ -387,6 +504,14 @@ public class InterestsActivity extends AppCompatActivity
 
     public void moviesBtn_Clicked   (View caller)
     {
+        boolean check = false;
+        if(isAlreadyThere(moviesbtn)==true)
+        {
+            changeColorUnSelected(moviesbtn);
+            array[whereIsIt(moviesbtn)]="";
+            check=true;
+        }
+
         int b=0;
         for(int i = 0; i<array.length; i++ )
 
@@ -397,12 +522,12 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
+
+
         if (b==3){}
-        else{
-        Drawable buttonDrawable = moviesbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        moviesbtn.setBackground(buttonDrawable);
+         else if(!check ){
+        changeColorSelected(moviesbtn);
         int a=0;
 
         for(int i = 0; i<array.length; i++ )
@@ -418,7 +543,15 @@ public class InterestsActivity extends AppCompatActivity
 
     public void onArtBtn_Clicked  (View caller)
     {
+        boolean check=false;
         int b=0;
+
+        if(isAlreadyThere(artbtn)==true)
+        {
+            changeColorUnSelected(artbtn);
+            array[whereIsIt(artbtn)]="";
+            check=true;
+        }
         for(int i = 0; i<array.length; i++ )
 
         {
@@ -428,12 +561,12 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
+
+
+
         if (b==3){}
-        else{
-        Drawable buttonDrawable = artbtn.getBackground();
-        buttonDrawable = DrawableCompat.wrap(buttonDrawable);
-        DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
-        artbtn.setBackground(buttonDrawable);
+        else if(!check){
+       changeColorSelected(artbtn);
         int a=0;
 
         for(int i = 0; i<array.length; i++ )

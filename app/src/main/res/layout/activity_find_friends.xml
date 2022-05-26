@@ -6,17 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".findFriends">
 
+    <ImageView
+        android:id="@+id/tendina"
+        android:layout_width="755dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="false"
+        android:contentDescription="@string/tendina"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tendina"
+        tools:ignore="ImageContrastCheck" />
 
     <EditText
         android:id="@+id/searchtextId"
         android:layout_width="300dp"
         android:layout_height="70dp"
-        android:layout_above="@id/recyclerview"
+        android:layout_above="@+id/recyclerview"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="110dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="107dp"
+        android:layout_marginBottom="7dp"
         android:autofillHints=""
         android:hint="@string/search_people_here"
         android:inputType="textMultiLine"
@@ -25,18 +38,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
-
     <ImageButton
         android:id="@+id/searchButton"
-        android:layout_width="92dp"
-        android:layout_height="60dp"
+        android:layout_width="76dp"
+        android:layout_height="56dp"
         android:layout_above="@+id/recyclerview"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="15dp"
+        android:background="#FFFF"
         android:contentDescription="@android:string/search_go"
         android:onClick="onSearchButton_Clicked"
-        app:srcCompat="@drawable/btn_bg"
+        app:srcCompat="@drawable/lente9"
         tools:ignore="ImageContrastCheck" />
 
     <androidx.recyclerview.widget.RecyclerView

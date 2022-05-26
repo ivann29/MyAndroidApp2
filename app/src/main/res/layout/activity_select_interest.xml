@@ -52,12 +52,14 @@
         android:layout_height="71dp"
         android:layout_marginBottom="170dp"
         android:text="@string/search_users_that_have_this_interest_in_common_with_you"
+        android:textColor="#D53E7E"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/interest3" />
+        app:layout_constraintTop_toBottomOf="@+id/interest3"
+        app:layout_constraintVertical_bias="0.473" />
 
     <Button
         android:id="@+id/searchInterestFriends"

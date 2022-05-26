@@ -31,9 +31,6 @@
             android:exported="false"
             android:parentActivityName=".AccountActivity" />
         <activity
-            android:name=".FreeTimeActivity"
-            android:exported="false" />
-        <activity
             android:name=".findFriends"
             android:exported="false"
             android:parentActivityName=".Menu" />
