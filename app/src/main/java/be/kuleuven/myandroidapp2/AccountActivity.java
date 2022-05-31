@@ -55,17 +55,13 @@ public class AccountActivity extends AppCompatActivity
     private ImageView IVPreviewImage;
     private ImageButton imageSelector;
     private SharedPreferences newPreference;
+    private String email;
     private Spinner spinner;
     private int SELECT_PICTURE = 200; // constant to compare the activity result code
     private String selected;
 
 
 
-
-
-
-
-//gnegnegne
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -79,6 +75,8 @@ public class AccountActivity extends AppCompatActivity
         imageSelector= (ImageButton) findViewById(R.id.imageSelector);
         spinner = (Spinner) findViewById(R.id.spinner);
         imageSelector.setVisibility(View.INVISIBLE);
+        newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
+        email = newPreference.getString("email", null);
 
          init(); //for interests set up
          init2(); // for location set up
@@ -99,18 +97,14 @@ public class AccountActivity extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
             {
                 //init4();
-                //if(!userFreeTime.equals("Select when your are free to hang out!")){}
                 selected = parent.getItemAtPosition(position).toString();
                 if(position!=0)
                 {
                     userFreeTime.setText(selected);
-                updateTime();
-
+                    updateTime(); //to update database
                 }
 
-
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> parent)
@@ -130,51 +124,179 @@ public class AccountActivity extends AppCompatActivity
     }
 
 
-        public void updateTime()
+    public void init()
     {
 
-        newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
-        String email = newPreference.getString("email", null);
         RequestQueue requestQueue;
-        String SUBMIT_URL ="https://studev.groept.be/api/a21pt206/updateFreeTime/";
-
         requestQueue = Volley.newRequestQueue(this);
+        String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/retrieveInterestUserLoggedIn/";
+        String requestURL = SUBMIT_URL  + email;
 
-        String requestURL = SUBMIT_URL  + selected + "/" + email;
+
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
+
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            String responseInterests = "";
+
+                            for (int i = 0; i < response.length(); i++)
+                            {
+                                Log.e("db", "inside responce");
+
+                                JSONObject curObject = response.getJSONObject(i);
+                                responseInterests += curObject.getString("interests");
 
 
+                            }
 
-        Log.d("Database","creating response");
+                            if (responseInterests.equals("null"))
+                            {
+                                userInterests.setText("Select your interests!");
 
-        StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
-                new Response.Listener<String>()
+                            }
+                            else
+                            {
+                                userInterests.setText(responseInterests);
+                            }
+
+
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+
+                },
+
+                new Response.ErrorListener()
                 {
                     @Override
-                    public void onResponse(String response)
-                    {
-                        Log.d("Database","response received");
-
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("db", "error");
                     }
+                }
+        );
+
+
+        requestQueue.add(submitRequest);}
+
+    public void init2() {
+
+        RequestQueue requestQueue2;
+        requestQueue2 = Volley.newRequestQueue(this);
+        String SUBMIT_URL2 = "https://studev.groept.be/api/a21pt206/retrieveUserLoggedInLocation/";
+        String requestURL2 = SUBMIT_URL2 + email;
+
+
+        JsonArrayRequest submitRequest2 = new JsonArrayRequest(Request.Method.GET, requestURL2, null,
+
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response2) {
+                        try {
+                            String responseLocation = "";
+
+                            for (int i = 0; i < response2.length(); i++)
+                            {
+                                Log.e("db", "inside responce");
+
+                                JSONObject curObject = response2.getJSONObject(i);
+                                responseLocation += curObject.getString("location");
+
+
+                            }
+
+                            if (!responseLocation.equals("null")) {
+                                userLocation.setText(responseLocation);
+
+                            } else {
+                                userInterests.setText("Open the map!");
+                            }
+
+
+                        } catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+
                 },
 
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-
+                        Log.e("db", "error");
                     }
                 }
-
         );
-        requestQueue.add(submitRequest);
-        Log.d("Database","response sent");
+        requestQueue2.add(submitRequest2);
     }
 
 
+    public void init3()
+    {
+        RequestQueue requestQueue;
+        requestQueue = Volley.newRequestQueue(this);
+
+
+        String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/selectProfileImageUserLoggedIn/";
+        String REQUEST_URL=  SUBMIT_URL + email;
+        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, REQUEST_URL, null,
+
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+
+
+                            for (int i = 0; i < response.length(); i++)
+                            {
+                                Log.e("db", "inside responce");
+                                String imageString = "";
+
+
+                                JSONObject curObject = response.getJSONObject(i);
+                                imageString += curObject.getString("profileImage");
+
+                                if(!imageString.equals("null"))
+                                {
+                                    imageSelector.setVisibility(View.INVISIBLE);
+                                    byte[] imageBytes = Base64.decode(imageString, Base64.DEFAULT);
+                                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+                                    IVPreviewImage.setImageBitmap(bitmap);
+
+                                }
+                                else
+                                {
+                                    imageSelector.setVisibility(View.VISIBLE);
+                                }
+
+                            }
+
+                        }
+                        catch (JSONException e) {
+                            Log.e("Database", e.getMessage(), e);
+                        }
+                    }
+
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error)
+                    {
+                        Log.e("db", "error");
+                    }
+                }
+        );
+
+
+        requestQueue.add(submitRequest);
+
+    }
+
     public void init4()
     {
-        newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
-        String email = newPreference.getString("email", null);
-
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(this);
 
@@ -234,142 +356,51 @@ public class AccountActivity extends AppCompatActivity
 
     }
 
-
-
-
-
-    public void init3()
+    public void updateTime()
     {
-        newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
-        String email = newPreference.getString("email", null);
 
         RequestQueue requestQueue;
+        String SUBMIT_URL ="https://studev.groept.be/api/a21pt206/updateFreeTime/";
+
         requestQueue = Volley.newRequestQueue(this);
 
+        String requestURL = SUBMIT_URL  + selected + "/" + email;
 
 
-        String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/selectProfileImageUserLoggedIn/";
-        String REQUEST_URL=  SUBMIT_URL + email;
-        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, REQUEST_URL, null,
 
-                new Response.Listener<JSONArray>() {
+        Log.d("Database","creating response");
+
+        StringRequest submitRequest = new StringRequest(Request.Method.GET, requestURL,
+                new Response.Listener<String>()
+                {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        try {
+                    public void onResponse(String response)
+                    {
+                        Log.d("Database","response received");
 
-
-                            for (int i = 0; i < response.length(); i++)
-                            {
-                                Log.e("db", "inside responce");
-                                String imageString = "";
-
-
-                                JSONObject curObject = response.getJSONObject(i);
-                                imageString += curObject.getString("profileImage");
-
-                                if(!imageString.equals("null"))
-                                {
-                                    imageSelector.setVisibility(View.INVISIBLE);
-                                    byte[] imageBytes = Base64.decode(imageString, Base64.DEFAULT);
-                                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                                    IVPreviewImage.setImageBitmap(bitmap);
-
-                                }
-                                else
-                                {
-                                    imageSelector.setVisibility(View.VISIBLE);
-                                }
-
-                            }
-
-                        }
-                        catch (JSONException e) {
-                            Log.e("Database", e.getMessage(), e);
-                        }
                     }
-
                 },
 
                 new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        Log.e("db", "error");
+                    public void onErrorResponse(VolleyError error) {
+
                     }
                 }
+
         );
-
-
         requestQueue.add(submitRequest);
-
+        Log.d("Database","response sent");
     }
 
 
 
-    public void init()
-    {
-        newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
-        String email = newPreference.getString("email", null);
 
-        RequestQueue requestQueue;
-        requestQueue = Volley.newRequestQueue(this);
-        String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/retrieveInterestUserLoggedIn/";
-        String requestURL = SUBMIT_URL  + email;
-
-
-        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            String responseInterests = "";
-
-                            for (int i = 0; i < response.length(); i++)
-                            {
-                                Log.e("db", "inside responce");
-
-                                JSONObject curObject = response.getJSONObject(i);
-                                responseInterests += curObject.getString("interests");
-
-
-                            }
-
-                            if (responseInterests.equals("null"))
-                            {
-                                userInterests.setText("Select your interests!");
-
-                            }
-                            else
-                            {
-                                userInterests.setText(responseInterests);
-                            }
-
-
-                        } catch (JSONException e) {
-                            Log.e("Database", e.getMessage(), e);
-                        }
-                    }
-
-                },
-
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("db", "error");
-                    }
-                }
-        );
-
-
-        requestQueue.add(submitRequest);}
 
 
 
     public void imageChooser()
     {
-
         // create an instance of the
         // intent of the type image
         Intent i = new Intent();
@@ -380,10 +411,7 @@ public class AccountActivity extends AppCompatActivity
         // with the returned requestCode
         startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
 
-
     }
-
-
 
     // this function is triggered when user
     // selects the image from the imageChooser
@@ -404,10 +432,6 @@ public class AccountActivity extends AppCompatActivity
                     imageSelector.setVisibility(View.INVISIBLE);
                     IVPreviewImage.setImageURI(selectedImageUri);
 
-                    /*String stringUri = selectedImageUri.getPath();
-                    byte[] imageBytes = Base64.decode(stringUri, Base64.DEFAULT);
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                    IVPreviewImage.setImageBitmap(bitmap);*/
 
                 }
 
@@ -424,19 +448,11 @@ public class AccountActivity extends AppCompatActivity
     {
         RequestQueue requestQueue;
         requestQueue = Volley.newRequestQueue(this);
-        // show the progress dialog box
-        /*pd.setMessage("Publishing Post");
-        pd.show();*/
+
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Saving, please wait...");
         progressDialog.show();
-        /*final String timestamp = String.valueOf(System.currentTimeMillis());
-        String filepathname = "Posts/" + "post" + timestamp;
-        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] data = byteArrayOutputStream.toByteArray();
-*/
+
         Bitmap bitmap = ((BitmapDrawable) IVPreviewImage.getDrawable()).getBitmap();
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -448,10 +464,6 @@ public class AccountActivity extends AppCompatActivity
         String SUBMIT_URL = "https://studev.groept.be/api/a21pt206/insertProfilePicture/";
 
 
-
-
-
-        /////////
 
         StringRequest  submitRequest = new StringRequest (Request.Method.POST,  SUBMIT_URL, new Response.Listener<String>() {
             @Override
@@ -469,89 +481,17 @@ public class AccountActivity extends AppCompatActivity
                 // Toast.makeText(MainActivity.this, "Post request failed", Toast.LENGTH_LONG).show();
             }
         })
-
         { //NOTE THIS PART: here we are passing the parameter to the webservice, NOT in the URL!
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
-                String email = newPreference.getString("email", null);
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("image", imageString);
                 params.put("email", email);
-
-
                 return params;
-            }
-        };
-
+            }};
         requestQueue.add(submitRequest);
     }
-
-
-        public void init2() {
-
-        newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);String email = newPreference.getString("email", null);
-
-        RequestQueue requestQueue2;
-        requestQueue2 = Volley.newRequestQueue(this);
-        String SUBMIT_URL2 = "https://studev.groept.be/api/a21pt206/retrieveUserLoggedInLocation/";
-        String requestURL2 = SUBMIT_URL2 + email;
-
-
-        JsonArrayRequest submitRequest2 = new JsonArrayRequest(Request.Method.GET, requestURL2, null,
-
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response2) {
-                        try {
-                            String responseLocation = "";
-
-                            for (int i = 0; i < response2.length(); i++)
-                            {
-                                Log.e("db", "inside responce");
-
-                                JSONObject curObject = response2.getJSONObject(i);
-                                responseLocation += curObject.getString("location");
-
-
-                            }
-
-                            if (!responseLocation.equals("null")) {
-                                userLocation.setText(responseLocation);
-
-                            } else {
-                                userInterests.setText("Open the map!");
-                            }
-
-
-                        } catch (JSONException e) {
-                            Log.e("Database", e.getMessage(), e);
-                        }
-                    }
-
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("db", "error");
-                    }
-                }
-        );
-
-
-        requestQueue2.add(submitRequest2);
-    }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -559,28 +499,18 @@ public class AccountActivity extends AppCompatActivity
     {
         Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
-
-
     }
 
     public void onBtnFreeTime_Clicked(View caller)
     {
         Toast.makeText(this,"Use the spinner to select your free time",Toast.LENGTH_LONG).show();
-
     }
 
 
-    public void onBtnInterests_Clicked(View caller){
-
-
-
-
+    public void onBtnInterests_Clicked(View caller)
+    {
         Intent intent = new Intent(this, InterestsActivity.class);
         startActivity(intent);
-
-
-
-
     }
 
 

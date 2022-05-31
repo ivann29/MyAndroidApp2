@@ -29,8 +29,6 @@ import java.util.Arrays;
 
 public class InterestsActivity extends AppCompatActivity
 {
-
-
     private Button sportsbtn;
     private Button actingbtn;
     private Button moviesbtn;
@@ -44,13 +42,14 @@ public class InterestsActivity extends AppCompatActivity
     private Button ConfirmButton;
     private String[] array;
     private SharedPreferences newPreference;
-
-
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
+        email = newPreference.getString("email", null);
         setContentView(R.layout.activity_interests);
         sportsbtn = (Button) findViewById(R.id.sports);
         actingbtn = (Button) findViewById(R.id.acting);
@@ -62,18 +61,15 @@ public class InterestsActivity extends AppCompatActivity
         signbtn = (Button) findViewById(R.id.sing);
         foodbtn = (Button) findViewById(R.id.foodDrinks);
         businessbtn = (Button) findViewById(R.id.business);
+        ConfirmButton = (Button) findViewById(R.id.confirmButton);
         array = new String[3];
         Arrays.fill(array, "");
 
     }
 
-
-
-
     public void onCofirm_clicked(View caller)
     {
-        newPreference = getSharedPreferences("details", Context.MODE_PRIVATE);
-        String email = newPreference.getString("email", null);
+
         RequestQueue requestQueue;
         String SUBMIT_URL =" https://studev.groept.be/api/a21pt206/accountInterestIole/";
 
@@ -84,8 +80,6 @@ public class InterestsActivity extends AppCompatActivity
                 array[1] + "/" +
                 array[2] + "/" +
                 email;
-
-
 
         Log.d("Database","creating response");
 
@@ -114,7 +108,6 @@ public class InterestsActivity extends AppCompatActivity
 
 
     }
-
 
 
     public boolean isAlreadyThere(Button btn)
@@ -148,7 +141,6 @@ public class InterestsActivity extends AppCompatActivity
         buttonDrawable = DrawableCompat.wrap(buttonDrawable);
         DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorSelected));
         btn.setBackground(buttonDrawable);
-
     }
 
 
@@ -158,10 +150,7 @@ public class InterestsActivity extends AppCompatActivity
         buttonDrawable = DrawableCompat.wrap(buttonDrawable);
         DrawableCompat.setTint(buttonDrawable, getResources().getColor(R.color.colorUnSelected));
         btn.setBackground(buttonDrawable);
-
     }
-
-
 
 
     public void politicsBtn_clicked   (View caller)
@@ -260,17 +249,12 @@ public class InterestsActivity extends AppCompatActivity
         }
         int b=0;
         for(int i = 0; i<array.length; i++ )
-
         {
             if(!array[i].equals(""))
             {
                 b=b+1;
             }
-
         }
-
-
-
 
         if (b==3){}
         else if(!check)
@@ -352,8 +336,6 @@ public class InterestsActivity extends AppCompatActivity
             }
 
         }
-
-
 
         if (b==3){}
 
@@ -580,11 +562,6 @@ public class InterestsActivity extends AppCompatActivity
             else{}
         }}
     }
-
-
-
-
-
 
 
 

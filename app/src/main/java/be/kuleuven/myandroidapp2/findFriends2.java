@@ -11,11 +11,7 @@ public class findFriends2
 
     }
 
-    public findFriends2()
-    {
 
-
-    }
 
     public void setEmail(String email)
     {

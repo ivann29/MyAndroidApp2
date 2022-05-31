@@ -1,5 +1,6 @@
 package be.kuleuven.myandroidapp2;
 
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,20 +25,21 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import adapterClasses.RecyclerViewAdapter;
 
 public class findFriends extends AppCompatActivity
 {
 
-    private Toolbar mtoolbar;
+
     private EditText searchInputText;
     private RecyclerView recyclerView;
     private ImageButton searchButton;
     private static final String QUEUE_URL = "https://studev.groept.be/api/a21pt206/search/";
     private RequestQueue requestQueue;
 
-    private ArrayList<findFriends2> users;
+    private List<findFriends2> users;
 
     private RecyclerViewAdapter adapter;
 
@@ -55,8 +57,8 @@ public class findFriends extends AppCompatActivity
         searchButton = (ImageButton) findViewById(R.id.searchButton);
         users = new ArrayList<findFriends2>();
 
-       adapter = new RecyclerViewAdapter(this, users);
-       recyclerView.setAdapter(adapter);
+        adapter = new RecyclerViewAdapter(this, users);
+        recyclerView.setAdapter(adapter);
 
 
 
@@ -68,6 +70,7 @@ public class findFriends extends AppCompatActivity
         requestQueue = Volley.newRequestQueue(this);
 
 
+
         String requestURL = QUEUE_URL + searchInputText.getText();
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -76,48 +79,37 @@ public class findFriends extends AppCompatActivity
                 {
                     @Override
                     public void onResponse(JSONArray response) {
-                        try
-                        {
+                        try {
+                            String responseEmail = "";
+
                             Iterator<findFriends2> it= users.iterator();
                             while(it.hasNext())
                             {
                                 findFriends2 element= it.next();
                                 it.remove();
+                                setAdapter();
                             }
-
-                            String responseEmail = "";
 
                             for (int i = 0; i < response.length(); i++)
                             {
-                                 responseEmail = "";
                                 Log.e("db", "inside responce");
 
                                 JSONObject curObject = response.getJSONObject(i);
-                                responseEmail += curObject.getString("email");
+                                responseEmail = curObject.getString("email");
+                                findFriends2 UserToAdd = new findFriends2(responseEmail);
 
-                                System.out.println(responseEmail);
-
-
-
-
-                                if (!responseEmail.equals(""))
-                                {
-
-                                    findFriends2 UserToAdd = new findFriends2(responseEmail);
-                                    users.add(UserToAdd);
-                                    setAdapter();
-                                }
+                                users.add(UserToAdd);
+                                setAdapter();
 
 
-                            }}
+
+                            }
 
 
 
 
-
-
-                        catch (JSONException e)
-                        {
+                        }
+                        catch (JSONException e) {
                             Log.e("Database", e.getMessage(), e);
                         }
                     }
@@ -140,10 +132,7 @@ public class findFriends extends AppCompatActivity
 
     private void setAdapter()
     {
-
-        //adapter = new RecyclerViewAdapter(this, users);
         recyclerView.setAdapter(adapter);
-
     }
 
 
@@ -152,4 +141,3 @@ public class findFriends extends AppCompatActivity
 
 
 }
-

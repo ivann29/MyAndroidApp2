@@ -46,7 +46,7 @@ import java.util.Locale;
 
 import be.kuleuven.myandroidapp2.R;
 
-//check if u have thisjksjkd
+
 public class MapsActivity2 extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = "MapsActivity2";
