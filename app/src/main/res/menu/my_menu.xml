@@ -14,10 +14,7 @@
 
         android:title="Add Blogs" />
 
-    <item
-        android:id="@+id/nav_chat"
 
-        android:title="ChatList" />
     <item
         android:id="@+id/nav_profile"
 

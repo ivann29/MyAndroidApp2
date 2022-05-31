@@ -8,8 +8,7 @@ public class ModelUsers {
     public ModelUsers() {
     }
 
-    String onlineStatus;
-    String typingTo;
+
 
     public String getName() {
         return name;
@@ -19,13 +18,6 @@ public class ModelUsers {
         this.name = name;
     }
 
-    public String getTypingTo() {
-        return typingTo;
-    }
-
-    public void setTypingTo(String typingTo) {
-        this.typingTo = typingTo;
-    }
 
     public String getEmail() {
         return email;
@@ -44,26 +36,24 @@ public class ModelUsers {
     }
 
     public String getUid() {
-        return uid;
+        return location;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setUid(String location) {
+        this.location = location;
     }
 
-    public ModelUsers(String name, String onlineStatus, String typingTo, String email, String image, String uid) {
+    public ModelUsers(String name, String email, String image, String location) {
         this.name = name;
-        this.onlineStatus = onlineStatus;
-        this.typingTo = typingTo;
         this.email = email;
         this.image = image;
-        this.uid = uid;
+        this.location = location;
     }
 
     String email;
 
     String image;
 
-    String uid;
+    String location;
 }
 

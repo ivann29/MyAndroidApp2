@@ -57,7 +57,7 @@ public class Dash extends AppCompatActivity {
                     return true;
 
                 case R.id.nav_profile:
-                    actionBar.setTitle("Profile");
+                    actionBar.setTitle("Free time");
                     ProfileFragment fragment1 = new ProfileFragment();
                     FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction1.replace(R.id.content, fragment1);
@@ -72,13 +72,7 @@ public class Dash extends AppCompatActivity {
                     fragmentTransaction2.commit();
                     return true;
 
-                case R.id.nav_chat:
-                    actionBar.setTitle("Chats");
-                    ChatListFragment listFragment = new ChatListFragment();
-                    FragmentTransaction fragmentTransaction3 = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction3.replace(R.id.content, listFragment, "");
-                    fragmentTransaction3.commit();
-                    return true;
+
 
                 case R.id.nav_addblogs:
                     actionBar.setTitle("Add Blogs");

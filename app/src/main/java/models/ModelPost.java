@@ -38,13 +38,6 @@ public class ModelPost {
         this.title = title;
     }
 
-    public String getUdp() {
-        return udp;
-    }
-
-    public void setUdp(String udp) {
-        this.udp = udp;
-    }
 
     public String getUemail() {
         return uemail;
@@ -54,13 +47,6 @@ public class ModelPost {
         this.uemail = uemail;
     }
 
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
 
     public String getUimage() {
         return uimage;
@@ -96,15 +82,13 @@ public class ModelPost {
         this.pcomments = pcomments;
     }
 
-    public ModelPost(String description, String pid, String ptime, String pcomments, String title, String udp, String uemail, String uid, String uimage, String uname, String plike) {
+    public ModelPost(String description, String pid, String ptime, String pcomments, String title,  String uemail,  String uimage, String uname, String plike) {
         this.description = description;
         this.pid = pid;
         this.ptime = ptime;
         this.pcomments = pcomments;
         this.title = title;
-        this.udp = udp;
         this.uemail = uemail;
-        this.uid = uid;
         this.uimage = uimage;
         this.uname = uname;
         this.plike = plike;
@@ -114,12 +98,10 @@ public class ModelPost {
 
     String title;
 
-    String udp;
     String uemail;
-    String uid;
+
     String uimage;
 
     String uname, plike;
 
 }
-

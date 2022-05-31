@@ -47,9 +47,6 @@ import java.util.Map;
 
 import be.kuleuven.myandroidapp2.R;
 
-//import com.google.firebase.storage.FirebaseStorage;
-//import com.google.firebase.storage.StorageReference;
-//import com.google.firebase.storage.UploadTask;
 
 
 /**
@@ -65,7 +62,6 @@ public class AddBlogsFragment extends Fragment {
 
     private String imageString;
 
-    //FirebaseAuth firebaseAuth;
     EditText title, des;
     private static final int CAMERA_REQUEST = 100;
     private static final int STORAGE_REQUEST = 200;
@@ -73,13 +69,11 @@ public class AddBlogsFragment extends Fragment {
     String storagePermission[];
     ProgressDialog pd;
     ImageView image;
-    String edititle, editdes, editimage;
     private static final int IMAGEPICK_GALLERY_REQUEST = 300;
     private static final int IMAGE_PICKCAMERA_REQUEST = 400;
 
     Uri imageuri = null;
-    String name, email, uid, dp;
-    //DatabaseReference databaseReference;
+    String name, email, dp;
     Button upload;
     private ProgressDialog progressDialog;
 
@@ -90,7 +84,6 @@ public class AddBlogsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //firebaseAuth = FirebaseAuth.getInstance();
         View view = inflater.inflate(R.layout.fragment_add_blogs, container, false);
         requestQueue = Volley.newRequestQueue(getContext());
 
@@ -100,30 +93,8 @@ public class AddBlogsFragment extends Fragment {
         upload = view.findViewById(R.id.pupload);
         pd = new ProgressDialog(getContext());
         pd.setCanceledOnTouchOutside(false);
-        Intent intent = getActivity().getIntent();
 
-        // Retrieving the user data like name ,email and profile pic using query
-        /*databaseReference = FirebaseDatabase.getInstance().getReference("Users");
-        Query query = databaseReference.orderByChild("email").equalTo(email);
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    name = dataSnapshot1.child("name").getValue().toString();
-                    email = "" + dataSnapshot1.child("email").getValue();
-                    dp = "" + dataSnapshot1.child("image").getValue().toString();
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        */
-        email ="habibi";
-        name = "djkask";
-        dp="sjkd";
         // Initialising camera and storage permission
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -279,19 +250,11 @@ public class AddBlogsFragment extends Fragment {
 
 
     private void uploadData(final String titl, final String description) {
-        // show the progress dialog box
-        /*pd.setMessage("Publishing Post");
-        pd.show();*/
+
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Uploading, please wait...");
         progressDialog.show();
-        /*final String timestamp = String.valueOf(System.currentTimeMillis());
-        String filepathname = "Posts/" + "post" + timestamp;
-        Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-        byte[] data = byteArrayOutputStream.toByteArray();
-*/
+
         Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -325,7 +288,6 @@ public class AddBlogsFragment extends Fragment {
             protected Map<String, String> getParams() throws AuthFailureError {
                 newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
                 String email = newPreference.getString("email", null);
-                String password = newPreference.getString("password", null);
                 LocalDateTime timex = LocalDateTime.now();
                 String format= timex.toString();
                 Map<String, String> params = new HashMap<String, String>();
@@ -340,14 +302,6 @@ public class AddBlogsFragment extends Fragment {
 
         requestQueue.add(submitRequest);
     }
-
-
-    //////////////////
-    /////////////////
-
-
-
-
 
 
 

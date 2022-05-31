@@ -16,26 +16,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 import be.kuleuven.myandroidapp2.R;
 import models.ModelUsers;
 
-//import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
 
     Context context;
-    FirebaseAuth firebaseAuth;
-    String uid;
+
 
     public AdapterUsers(Context context, List<ModelUsers> list) {
         this.context = context;
         this.list = list;
-        //firebaseAuth = FirebaseAuth.getInstance();
-        //uid = firebaseAuth.getUid();
+
     }
 
     List<ModelUsers> list;
@@ -65,10 +62,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         } catch (Exception e) {
 
         }
-        /*try {
-            Glide.with(context).load(userImage).into(holder.profiletv);
-        } catch (Exception e) {
-        }*/
+
         holder.profiletv.setOnClickListener(new View.OnClickListener() {
 
             private RequestQueue requestQueue;

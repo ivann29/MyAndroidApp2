@@ -34,11 +34,7 @@ import adapterClasses.AdapterUsers;
 import be.kuleuven.myandroidapp2.R;
 import models.ModelUsers;
 
-//import com.google.firebase.database.DataSnapshot;
-//import com.google.firebase.database.DatabaseError;
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-//import com.google.firebase.database.ValueEventListener;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,13 +44,12 @@ public class ProfileFragment extends Fragment {
     RecyclerView recyclerView;
     AdapterUsers adapterUsers;
     List<ModelUsers> usersList;
-    //FirebaseAuth firebaseAuth;
     private RequestQueue requestQueue;
     private RequestQueue requestQueue1;
     private static final String QUEUE_URL = "https://studev.groept.be/api/a21pt206/userDay/";
     private static final String QUEUE_URL2 = "https://studev.groept.be/api/a21pt206/findDay/";
     private SharedPreferences newPreference;
-    protected  String interest1;
+    protected  String day;
     private ProgressDialog progressDialog;
     public ProfileFragment() {
         // Required empty public constructor
@@ -71,19 +66,18 @@ public class ProfileFragment extends Fragment {
          progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Loading, please wait");
         progressDialog.show();
-        getInterests();
+        getDay();
         getAllUsers();
-        System.out.println("hey2");
+
         return view;
     }
-    private void getInterests(){
+    private void getDay(){
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
 
-        //usersList.clear();
+
         newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
         String email = newPreference.getString("email", null);
-        String password = newPreference.getString("password", null);
         String requestURL = QUEUE_URL2+email ;
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -97,15 +91,14 @@ public class ProfileFragment extends Fragment {
                             for (int i = 0; i < response.length(); i++) {
                                 Log.e("db", "inside responce");
 
-                                String interest = "";
+                                String freeDay = "";
 
 
                                 JSONObject curObject = response.getJSONObject(i);
 
-                                interest += curObject.getString("freetime");
+                                freeDay += curObject.getString("freetime");
 
-                                interest1=interest;
-                                System.out.println(interest1);
+                                day=freeDay;
                                 getAllUsers();
 
 
@@ -136,12 +129,9 @@ public class ProfileFragment extends Fragment {
         System.out.println("hey");
         requestQueue1 = Volley.newRequestQueue(getActivity().getApplicationContext());
 
-
-        //usersList.clear();
         newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
         String email = newPreference.getString("email", null);
-        String password = newPreference.getString("password", null);
-        String requestURL = QUEUE_URL+email+ "/"+interest1 ;
+        String requestURL = QUEUE_URL+email+ "/"+day ;
         System.out.println(requestURL);
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
@@ -173,7 +163,7 @@ public class ProfileFragment extends Fragment {
 
 
                                 //System.out.println(title);
-                                ModelUsers modelUsers = new ModelUsers( email,  location, "ivan",  freeTime, image,  location);
+                                ModelUsers modelUsers = new ModelUsers( email,  freeTime, image,  location);
 
                                 usersList.add(modelUsers);
                                 adapterUsers = new AdapterUsers(getActivity(), usersList);

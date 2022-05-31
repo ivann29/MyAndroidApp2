@@ -36,10 +36,9 @@ import models.ModelPost;
  */
 public class HomeFragment extends Fragment {
 
-    //FirebaseAuth firebaseAuth;
+
     private RequestQueue requestQueue;
     private static final String QUEUE_URL = "https://studev.groept.be/api/a21pt206/TestIvan";
-    String myuid;
     RecyclerView recyclerView;
     List<ModelPost> posts;
     AdapterPosts adapterPosts;
@@ -47,14 +46,14 @@ public class HomeFragment extends Fragment {
 
     public HomeFragment() {
         // Required empty public constructor
-        //loadPosts();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        //firebaseAuth = FirebaseAuth.getInstance();
+
         recyclerView = view.findViewById(R.id.postrecyclerview);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -72,7 +71,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadPosts() {
-        //requestQueue = Volley.newRequestQueue(this);
+
         requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
 
@@ -109,7 +108,7 @@ public class HomeFragment extends Fragment {
                                 likes += curObject.getString("likes");
 
                                 System.out.println(title);
-                                ModelPost modelPost = new ModelPost( description,  id, time,  "0", title,  "b",  email,  "c",  image,  email, likes);
+                                ModelPost modelPost = new ModelPost( description,  id, time,  "0", title,  email,  image,  email, likes);
                                 posts.add(modelPost);
                                 adapterPosts = new AdapterPosts(getActivity(), posts);
                                 recyclerView.setAdapter(adapterPosts);
@@ -138,25 +137,6 @@ public class HomeFragment extends Fragment {
         requestQueue.add(submitRequest);
 
     }
-        /*DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                posts.clear();
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                    ModelPost modelPost = dataSnapshot1.getValue(ModelPost.class);
-                    posts.add(modelPost);
-                    adapterPosts = new AdapterPosts(getActivity(), posts);
-                    recyclerView.setAdapter(adapterPosts);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });*/
 
 
     @Override

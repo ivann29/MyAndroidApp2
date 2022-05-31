@@ -6,17 +6,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,16 +33,12 @@ import models.ModelPost;
 public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
     Context context;
-    String myuid;
-    //private DatabaseReference liekeref, postref;
-    boolean mprocesslike = false;
+
 
     public AdapterPosts(Context context, List<ModelPost> modelPosts) {
         this.context = context;
         this.modelPosts = modelPosts;
-        //myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //liekeref = FirebaseDatabase.getInstance().getReference().child("Likes");
-        //postref = FirebaseDatabase.getInstance().getReference().child("Posts");
+
     }
 
     List<ModelPost> modelPosts;
@@ -60,32 +52,24 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
-        final String uid = modelPosts.get(position).getUid();
+
         String nameh = modelPosts.get(position).getUname();
         final String titlee = modelPosts.get(position).getTitle();
         final String descri = modelPosts.get(position).getDescription();
         final String ptime = modelPosts.get(position).getPtime();
-        String dp = modelPosts.get(position).getUdp();
         String plike = modelPosts.get(position).getPlike();
         final String image = modelPosts.get(position).getUimage();
 
 
-        /*byte[] imageBytes = Base64.decode(image, Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length); */
 
-        String email = modelPosts.get(position).getUemail();
         String comm = modelPosts.get(position).getPcomments();
-        final String pid = modelPosts.get(position).getPtime();
-        //Calendar calendar = Calendar.getInstance(Locale.ENGLISH);
-        //calendar.setTimeInMillis(Long.parseLong(ptime));
-        //String timedate = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
         holder.name.setText(nameh);
         holder.title.setText(titlee);
         holder.description.setText(descri);
         holder.time.setText(ptime);
         holder.like.setText(plike + " Likes");
         holder.comments.setText(comm + " Comments");
-        //setLikes(holder, ptime);
+
         try {
 
 
@@ -104,15 +88,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         } catch (Exception e) {
 
         }
-       /* holder.like.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(holder.itemView.getContext(), PostLikedByActivity.class);
-                intent.putExtra("pid", pid);
-                holder.itemView.getContext().startActivity(intent);
-            }
-        });*/
         holder.likebtn.setOnClickListener(new View.OnClickListener() {
 
             private RequestQueue requestQueue;
@@ -168,71 +144,13 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                     check = 1;
 
                 }
-                //plike += 1;
 
-               /*  int plike = Integer.parseInt(modelPosts.get(position).getPlike());
-                plike += 1;
-                postref.child(postid).child("plike").setValue("" + (plike - 1));*/
-                /*mprocesslike = true;
-                final String postid = modelPosts.get(position).getPtime();
-                liekeref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    //plike += 1;
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (mprocesslike) {
-                            if (dataSnapshot.child(postid).hasChild(myuid)) {
-                                postref.child(postid).child("plike").setValue("" + (plike - 1));
-                                liekeref.child(postid).child(myuid).removeValue();
-                                mprocesslike = false;
-                            } else {
-                                postref.child(postid).child("plike").setValue("" + (plike + 1));
-                                liekeref.child(postid).child(myuid).setValue("Liked");
-                                mprocesslike = false;
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });*/
             }
         });
-        holder.more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showMoreOptions(holder.more, uid, myuid, ptime, image);
-            }
-        });
-        /*holder.comment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, PostDetailsActivity.class);
-                intent.putExtra("pid", ptime);
-                context.startActivity(intent);
-            }
-        });*/
 
     }
 
-    private void showMoreOptions(ImageButton more, String uid, String myuid, final String pid, final String image) {
-        PopupMenu popupMenu = new PopupMenu(context, more, Gravity.END);
-        if (uid.equals(myuid)) {
-            popupMenu.getMenu().add(Menu.NONE, 0, 0, "DELETE");
-        }
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == 0) {
-                    //deltewithImage(pid, image);
-                }
 
-                return false;
-            }
-        });
-        popupMenu.show();
-    }
 
 
     @Override
@@ -249,7 +167,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-            //picture = itemView.findViewById(R.id.picturetv);
+
             image = itemView.findViewById(R.id.pimagetv);
             name = itemView.findViewById(R.id.unametv);
             time = itemView.findViewById(R.id.utimetv);
@@ -264,4 +182,3 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         }
     }
 }
-

@@ -49,7 +49,6 @@ public class UsersFragment extends Fragment {
     RecyclerView recyclerView;
     AdapterUsers adapterUsers;
     List<ModelUsers> usersList;
-    //FirebaseAuth firebaseAuth;
     private RequestQueue requestQueue;
     private RequestQueue requestQueue1;
     private static final String QUEUE_URL = "https://studev.groept.be/api/a21pt206/usersInterests/";
@@ -70,11 +69,9 @@ public class UsersFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         usersList = new ArrayList<>();
-        //firebaseAuth = FirebaseAuth.getInstance();
-        //getInterests();
         newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
-
         String interest = newPreference.getString("selectedInterest", null);
+
         if( interest.equals("null") )
         {
            // Toast.makeText(getActivity(), "No user matches selected interests", Toast.LENGTH_SHORT).show();
@@ -89,79 +86,21 @@ public class UsersFragment extends Fragment {
         System.out.println("hey2");
         return view;
     }
-    private void getInterests()
-    {
-        requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
-
-        //usersList.clear();
-        newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
-        String email = newPreference.getString("email", null);
-        String password = newPreference.getString("password", null);
-        String requestURL = QUEUE_URL2+email ;
-
-        JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
-
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response)
-                    {
-                        try {
-
-
-                            for (int i = 0; i < response.length(); i++) {
-                                Log.e("db", "inside responce");
-
-                                String interest = "";
-
-
-                                JSONObject curObject = response.getJSONObject(i);
-
-                                interest += curObject.getString("interests");
-
-                                interest1=interest;
-                                System.out.println(interest1);
-                                getAllUsers();
-
-
-
-
-                            }
-
-
-
-                        } catch (JSONException e) {
-                            Log.e("Database", e.getMessage(), e);
-                        }
-                    }
-
-                },
-
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("db", "error");
-                    }
-                }
-        );
-        requestQueue.add(submitRequest);
-
-    }
     private void getAllUsers()
     {
-        System.out.println("hey");
+
         requestQueue1 = Volley.newRequestQueue(getActivity().getApplicationContext());
 
 
-        //usersList.clear();
-       newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
+
+        newPreference = getActivity().getSharedPreferences("details", Context.MODE_PRIVATE);
         String email = newPreference.getString("email", null);
-        String password = newPreference.getString("password", null);
         String interest = newPreference.getString("selectedInterest", null);
 
-        System.out.println(interest);
+
         String requestURL = QUEUE_URL+email+ "/" + interest ;
-        System.out.println(requestURL);
+
 
         JsonArrayRequest submitRequest = new JsonArrayRequest(Request.Method.GET, requestURL, null,
 
@@ -200,8 +139,8 @@ public class UsersFragment extends Fragment {
                                 image += curObject.getString("profileImage");
 
 
-                                //System.out.println(title);
-                                ModelUsers modelUsers = new ModelUsers( email,  location, "ivan",  interests, image,  location);
+
+                                ModelUsers modelUsers = new ModelUsers( email,  interests, image,  location);
 
                                 usersList.add(modelUsers);
                                 adapterUsers = new AdapterUsers(getActivity(), usersList);
